@@ -1,0 +1,12 @@
+language: python
+dist: xenial
+sudo: false
+python:
+  - "3.6"
+  - "3.7"
+env:
+  global:
+    - MODULE=passaas
+install: source ci/install.sh
+script: bash ci/test.sh
+after_success: source ci/success.sh
