@@ -1,0 +1,63 @@
+swagger: "2.0"
+info:
+  description: Passaas API
+  version: "1.0.0"
+  title: Passwd as a Service
+consumes:
+  - application/json
+produces:
+  - application/json
+
+basePath: /api
+paths:
+  /users:
+    get:
+      operationId: passaas.controllers.user_controller.fetch_all_users
+      tags: [Users]
+      summary: A list of all users on the system
+      description: A list of all users on the system, as defined in the passwd file
+      responses:
+        200:
+          description: Returns users
+          schema:
+            type: object
+            properties:
+              users:
+                type: array
+                items:
+                  $ref: '#/definitions/User'
+
+definitions:
+  User:
+    type: object
+    properties:
+      name:
+        type: string
+        description: User name
+        example: "root"
+        readOnly: true
+      uid:
+        type: integer
+        description: Unique identifier
+        example: 123
+        readOnly: true
+      gid:
+        type: integer
+        description: Group id
+        example: 123
+        readOnly: true
+      comment:
+        type: string
+        description: Comment
+        example: "root"
+        readOnly: true
+      home:
+        type: string
+        description: home directory
+        example: "/root"
+        readOnly: true
+      shell:
+        type: string
+        description: shell
+        example: "/bin/bash"
+        readOnly: true
