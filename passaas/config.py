@@ -7,7 +7,7 @@ class Config:
     DEBUG = False
     TESTING = False
     APP_PORT = 9090
-    PROPAGATE_EXCEPTIONS = True  # don't show traceback even if in debug mode
+    PROPAGATE_EXCEPTIONS = False  # don't show traceback even if in debug mode
     PASSWD_PATH = "/etc/passwd"
 
 
@@ -23,6 +23,7 @@ class DevConfig(Config):
 
     ENV = "development"
     DEBUG = True
+    PROPAGATE_EXCEPTIONS = True
 
 
 class TestConfig(Config):
