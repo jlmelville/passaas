@@ -9,6 +9,54 @@
 
 A REST service built using [connexion](https://github.com/zalando/connexion).
 
+## Installing
+
+```bash
+pip install -r requirements.txt
+```
+
+## Running
+
+Using Flask's built-in server:
+
+```bash
+python app.py
+```
+
+This will launch the app at `localhost:9090`.
+
+To override the host and port:
+
+```bash
+# listen at 127.0.0.1:5000
+python app.py --host=127.0.0.1 --port=5000
+```
+
+### Specifying the `passwd` file
+
+By default the `passwd` file is looked for at `/etc/passwd`. To use a different file, use the `--passwd` option:
+
+```bash
+python app.py --passwd=/path/to/some/other/passwd
+```
+
+## Documentation
+
+Assuming the default host and port, the Swagger documentation for the API can be found at:
+
+```bash
+http://localhost:9090/api/ui/
+```
+
+## Tests
+
+To run the unit  tests:
+
+```shell
+pip install -r test-requirements.txt
+python setup.py test
+```
+
 ## See Also
 
 Examples of using connexion with unit testing are incredibly thin on the ground. <https://github.com/hirose31/connexion-tiny-petstore> was invaluable in getting going. Also [pytest-azurepipelines](https://pypi.org/project/pytest-azurepipelines/) made publishing test results on Azure pipelines very easy.
