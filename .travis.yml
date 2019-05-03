@@ -6,7 +6,7 @@ python:
   - "3.7"
 env:
   global:
-    - MODULE=pynndescent
+    - MODULE=passaas
   matrix:
     - COVERAGE="false"
     - COVERAGE="true"
