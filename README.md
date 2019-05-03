@@ -4,6 +4,8 @@
 [![Build Status](https://dev.azure.com/jlmelville/Python%20Pipeline/_apis/build/status/jlmelville.passaas?branchName=master)](https://dev.azure.com/jlmelville/Python%20Pipeline/_build/latest?definitionId=3&branchName=master)
 [![Travis Build Status](https://travis-ci.org/jlmelville/passaas.svg?branch=master)](https://travis-ci.org/jlmelville/passaas)
 [![Test Coverage Status](https://coveralls.io/repos/github/jlmelville/passaas/badge.svg)](https://coveralls.io/github/jlmelville/passaas)
+[![Language grade: Python](https://img.shields.io/lgtm/grade/python/g/jlmelville/passaas.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/jlmelville/passaas/context:python)
+[![Total alerts](https://img.shields.io/lgtm/alerts/g/jlmelville/passaas.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/jlmelville/passaas/alerts/)
 
 A REST service built using [connexion](https://github.com/zalando/connexion).
 
