@@ -1,3 +1,5 @@
 set -e
 
-coveralls || echo "Coveralls upload failed"
+if [[ "${COVERAGE}" == "true" ]]; then
+    coveralls || echo "Coveralls upload failed"
+fi
