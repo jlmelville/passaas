@@ -1,5 +1,7 @@
 # Password as a Service
 
+[![Build Status](https://dev.azure.com/jlmelville/Python%20Pipeline/_apis/build/status/jlmelville.passaas?branchName=master)](https://dev.azure.com/jlmelville/Python%20Pipeline/_build/latest?definitionId=3&branchName=master)
+
 A REST service built using [connexion](https://github.com/zalando/connexion).
 
 ## See Also
