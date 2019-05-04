@@ -369,3 +369,33 @@ def test_malformed_group_too_few_elements_app(malformed_group_too_few_elements_a
     return wt.TestApp(malformed_group_too_few_elements_app)
 
 
+class MalformedGroupTooManyElementsConfig(TestConfig):
+    """Configuration pointing to a malformed group file with too many elements in a line."""
+
+    PRESERVE_CONTEXT_ON_EXCEPTION = False
+    GROUP_PATH = os.path.abspath(
+        os.path.join(
+            Config.PROJECT_ROOT, "tests", "test_data", "malformed_group_too_many"
+        )
+    )
+
+
+@pytest.yield_fixture(scope="function")
+def malformed_group_too_many_elements_app():
+    """An application with a malformed group file with too many elements in a line."""
+    _app = create_app(MalformedGroupTooManyElementsConfig)
+
+    ctx = _app.app.test_request_context()
+    ctx.push()
+
+    yield _app.app
+
+    ctx.pop()
+
+
+@pytest.fixture(scope="function")
+def test_malformed_group_too_many_elements_app(malformed_group_too_many_elements_app):
+    """A Webtest app with a malformed group file with too many elements in a line."""
+    return wt.TestApp(malformed_group_too_many_elements_app)
+
+

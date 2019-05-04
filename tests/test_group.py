@@ -86,3 +86,11 @@ class TestBadGroup:
             self.resource, expect_errors=True
         )
         assert response.status_int == 500
+
+    def test_malformed_group_too_many_return_500(
+        self, test_malformed_group_too_many_elements_app
+    ):
+        response = test_malformed_group_too_many_elements_app.get(
+            self.resource, expect_errors=True
+        )
+        assert response.status_int == 500
