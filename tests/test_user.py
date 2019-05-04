@@ -165,6 +165,10 @@ class TestQueryUser:
         response = testapp.get("/api/users/query?name=root&gid=1", expect_errors=True)
         assert response.status_int == 404
 
+    def test_query_bad_parameter_returns_400(self, testapp):
+        response = testapp.get(r"/api/users/query?member=james", expect_errors=True)
+        assert response.status_int == 400
+
 
 class TestUpdatePasswdFile:
     """Test that changes to a passwd file are reflected in the response"""

@@ -58,6 +58,8 @@ paths:
             type: array
             items:
               $ref: '#/definitions/User'
+        400:
+          description: Unknown or incorrectly specified query
         404:
           description: No users matched the query
   /groups:
