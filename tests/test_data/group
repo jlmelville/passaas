@@ -3,3 +3,5 @@ daemon:x:1:
 bin:x:2:
 adm:x:4:syslog,james
 dialout:x:20:james
+syslog:x:106:
+james:x:1000:

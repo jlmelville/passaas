@@ -16,7 +16,7 @@ class TestGetAllGroups:
         assert groups_response.status_int == 200
 
     def test_response_length(self, groups_response):
-        assert len(groups_response.json) == 5
+        assert len(groups_response.json) == 7
 
     def test_names(self, groups_response):
         assert [d["name"] for d in groups_response.json] == [
@@ -25,10 +25,12 @@ class TestGetAllGroups:
             "bin",
             "adm",
             "dialout",
+            "syslog",
+            "james",
         ]
 
     def test_gids(self, groups_response):
-        assert [d["gid"] for d in groups_response.json] == [0, 1, 2, 4, 20]
+        assert [d["gid"] for d in groups_response.json] == [0, 1, 2, 4, 20, 106, 1000]
 
     def test_members(self, groups_response):
         assert [d["members"] for d in groups_response.json] == [
@@ -37,6 +39,8 @@ class TestGetAllGroups:
             [],
             ["syslog", "james"],
             ["james"],
+            [],
+            [],
         ]
 
 
@@ -127,7 +131,7 @@ class TestQueryGroup:
     def test_query_empty_returns_everything(self, testapp):
         response = testapp.get("/api/groups/query")
         assert response.status_int == 200
-        assert len(response.json) == 5
+        assert len(response.json) == 7
 
     def test_unmatching_query_returns_404(self, testapp):
         response = testapp.get("/api/groups/query?gid=42", expect_errors=True)
@@ -158,8 +162,8 @@ class TestUpdateGroupFile:
         # Repeat request
         response = test_group_update_app.get("/api/groups")
         assert response.status_int == 200
-        # there is now one more item in the result
-        assert len(response.json) == 5
+        # there are now more items in the result
+        assert len(response.json) == 7
 
         # test_group_update restores original file
 

@@ -16,7 +16,7 @@ class TestGetAllUsers:
         assert users_response.status_int == 200
 
     def test_response_length(self, users_response):
-        assert len(users_response.json) == 5
+        assert len(users_response.json) == 7
 
     def test_names(self, users_response):
         assert [d["name"] for d in users_response.json] == [
@@ -25,13 +25,23 @@ class TestGetAllUsers:
             "bin",
             "sync",
             "list",
+            "syslog",
+            "james",
         ]
 
     def test_uids(self, users_response):
-        assert [d["uid"] for d in users_response.json] == [0, 1, 2, 4, 38]
+        assert [d["uid"] for d in users_response.json] == [0, 1, 2, 4, 38, 102, 1000]
 
     def test_gids(self, users_response):
-        assert [d["gid"] for d in users_response.json] == [0, 1, 2, 65534, 38]
+        assert [d["gid"] for d in users_response.json] == [
+            0,
+            1,
+            2,
+            65534,
+            38,
+            106,
+            1000,
+        ]
 
     def test_comments(self, users_response):
         assert [d["comment"] for d in users_response.json] == [
@@ -40,6 +50,8 @@ class TestGetAllUsers:
             "bin",
             "sync",
             "Mailing List Manager",
+            "",
+            ",,,",
         ]
 
     def test_homes(self, users_response):
@@ -49,6 +61,8 @@ class TestGetAllUsers:
             "/bin",
             "/bin",
             "/var/list",
+            "/home/syslog",
+            "/home/james",
         ]
 
     def test_shells(self, users_response):
@@ -58,6 +72,8 @@ class TestGetAllUsers:
             "/usr/sbin/nologin",
             "/bin/sync",
             "/usr/sbin/nologin",
+            "/usr/sbin/nologin",
+            "/bin/bash",
         ]
 
 
@@ -134,7 +150,7 @@ class TestQueryUser:
     def test_query_shell(self, testapp):
         response = testapp.get(r"/api/users/query?shell=%2Fusr%2Fsbin%2Fnologin")
         assert response.status_int == 200
-        assert len(response.json) == 3
+        assert len(response.json) == 4
         assert list({e["shell"] for e in response.json}) == ["/usr/sbin/nologin"]
 
     def test_query_two_args(self, testapp):
@@ -159,7 +175,7 @@ class TestQueryUser:
     def test_query_empty_returns_everything(self, testapp):
         response = testapp.get("/api/users/query")
         assert response.status_int == 200
-        assert len(response.json) == 5
+        assert len(response.json) == 7
 
     def test_unmatching_query_returns_404(self, testapp):
         response = testapp.get("/api/users/query?name=root&gid=1", expect_errors=True)
@@ -187,8 +203,8 @@ class TestUpdatePasswdFile:
 
         response = test_passwd_update_app.get("/api/users")
         assert response.status_int == 200
-        # there is now one more item in the result
-        assert len(response.json) == 5
+        # there are now more items in the result
+        assert len(response.json) == 7
 
         # fixture cleans up by copying back over a copy of the original file
 
