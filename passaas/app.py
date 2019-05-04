@@ -11,7 +11,7 @@ def create_app(config_object=ProdConfig):
     app = connexion.App(__name__, specification_dir=config_object.APP_DIR)
     # app.app.json_encoder = encoder.JSONEncoder
     app.app.config.from_object(config_object)
-    app.add_api("swagger.yaml")
+    app.add_api("swagger.yml")
 
     register_extensions(app)
     register_errorhandlers(app)
