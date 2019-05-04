@@ -184,15 +184,13 @@ class TestUpdatePasswdFile:
         dest_dir = os.path.dirname(dest)
         src = os.path.abspath(os.path.join(dest_dir, "passwd"))
         shutil.copyfile(src, dest)
-        try:
-            response = test_passwd_update_app.get("/api/users")
-            assert response.status_int == 200
-            # there is now one more item in the result
-            assert len(response.json) == 5
-        finally:
-            # clean up by copying back over a copy of the original file
-            src = os.path.abspath(os.path.join(dest_dir, "passwd4.orig"))
-            shutil.copyfile(src, dest)
+
+        response = test_passwd_update_app.get("/api/users")
+        assert response.status_int == 200
+        # there is now one more item in the result
+        assert len(response.json) == 5
+
+        # fixture cleans up by copying back over a copy of the original file
 
 
 class TestBadPasswd:

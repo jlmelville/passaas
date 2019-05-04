@@ -1,5 +1,6 @@
 """Defines fixtures available to all tests."""
 import os
+import shutil
 
 import pytest
 import webtest as wt
@@ -44,6 +45,12 @@ def passwd_update_app():
     ctx.push()
 
     yield _app.app
+
+    # Clean up after test
+    dest = _app.app.config["PASSWD_PATH"]
+    dest_dir = os.path.dirname(dest)
+    src = os.path.abspath(os.path.join(dest_dir, "passwd4.orig"))
+    shutil.copyfile(src, dest)
 
     ctx.pop()
 
