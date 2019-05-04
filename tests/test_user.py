@@ -1,4 +1,5 @@
 import pytest
+import webtest as wt
 
 
 @pytest.fixture(scope="function")
@@ -54,3 +55,42 @@ class TestGetAllUsers:
             "/bin/sync",
             "/usr/sbin/nologin",
         ]
+
+
+class TestBadPasswd:
+    def test_missing_passwd_returns500(self, test_missing_passwd_app):
+        response = test_missing_passwd_app.get("/api/users", expect_errors=True)
+        assert response.status_int == 500
+
+    def test_malformed_passwd_too_few_returns500(
+        self, test_malformed_passwd_too_few_elements_app
+    ):
+        response = test_malformed_passwd_too_few_elements_app.get(
+            "/api/users", expect_errors=True
+        )
+        print(response)
+        assert response.status_int == 500
+
+    def test_malformed_passwd_too_many_returns500(
+        self, test_malformed_passwd_too_many_elements_app
+    ):
+        response = test_malformed_passwd_too_many_elements_app.get(
+            "/api/users", expect_errors=True
+        )
+        assert response.status_int == 500
+
+    def test_malformed_passwd_bad_uid_returns500(
+        self, test_malformed_passwd_bad_uid_app
+    ):
+        response = test_malformed_passwd_bad_uid_app.get(
+            "/api/users", expect_errors=True
+        )
+        assert response.status_int == 500
+
+    def test_malformed_passwd_bad_gid_returns500(
+        self, test_malformed_passwd_bad_gid_app
+    ):
+        response = test_malformed_passwd_bad_gid_app.get(
+            "/api/users", expect_errors=True
+        )
+        assert response.status_int == 500

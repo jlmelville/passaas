@@ -13,8 +13,8 @@ class User(NamedTuple):
 
 def read_passwd():
     users = list()
-    with open(current_app.config["PASSWD_PATH"]) as f:
-        for line in f:
+    with open(current_app.config["PASSWD_PATH"]) as passwd_file:
+        for line in passwd_file:
             (name, _, uid, gid, comment, home, shell) = [
                 e.strip() for e in line.split(":")
             ]
