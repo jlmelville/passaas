@@ -38,3 +38,27 @@ class TestGetAllGroups:
             ["syslog", "james"],
             ["james"],
         ]
+
+
+class TestUpdateGroupFile:
+    """Test that changes to a group file are reflected in the response"""
+
+    def test_response_reflects_change_to_passwd(self, test_group_update_app):
+        # Establish that the file is in the expected initial state with 4 entries
+        response = test_group_update_app.get("/api/groups")
+        assert response.status_int == 200
+        assert len(response.json) == 4
+
+        # copy larger file over the original
+        dest = current_app.config["GROUP_PATH"]
+        dest_dir = os.path.dirname(dest)
+        src = os.path.abspath(os.path.join(dest_dir, "group"))
+        shutil.copyfile(src, dest)
+
+        # Repeat request
+        response = test_group_update_app.get("/api/groups")
+        assert response.status_int == 200
+        # there is now one more item in the result
+        assert len(response.json) == 5
+
+        # test_group_update restores original file
