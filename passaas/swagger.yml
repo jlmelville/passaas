@@ -60,6 +60,21 @@ paths:
               $ref: '#/definitions/User'
         404:
           description: No users matched the query
+  /groups:
+    get:
+      operationId: passaas.controllers.group_controller.fetch_all_groups
+      tags: [Groups]
+      summary: A list of all groups on the system
+      description: A list of all groups on the system, as defined in the group file
+      responses:
+        200:
+          description: Returns all groups
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Group'
+        404:
+          description: No groups
 
 parameters:
   uid:
@@ -138,3 +153,23 @@ definitions:
         description: shell
         example: "/bin/bash"
         readOnly: true
+  Group:
+    type: object
+    properties:
+      name:
+        type: string
+        description: Group name
+        example: "adm"
+        readOnly: true
+      gid:
+        type: integer
+        description: Group identifier
+        example: 4
+        readOnly: true
+      members:
+        type: array
+        items:
+          type: string
+          description: User in the group
+          example: "syslog"
+          readOnly: true

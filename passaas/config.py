@@ -9,6 +9,7 @@ class Config:
     APP_PORT = 9090
     PROPAGATE_EXCEPTIONS = False  # don't show traceback even if in debug mode
     PASSWD_PATH = "/etc/passwd"
+    GROUP_PATH = "/etc/group"
 
 
 class ProdConfig(Config):
@@ -34,4 +35,7 @@ class TestConfig(Config):
     TESTING = True
     PASSWD_PATH = os.path.abspath(
         os.path.join(Config.PROJECT_ROOT, "tests", "test_data", "passwd")
+    )
+    GROUP_PATH = os.path.abspath(
+        os.path.join(Config.PROJECT_ROOT, "tests", "test_data", "group")
     )
