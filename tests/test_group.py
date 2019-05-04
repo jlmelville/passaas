@@ -94,3 +94,9 @@ class TestBadGroup:
             self.resource, expect_errors=True
         )
         assert response.status_int == 500
+
+    def test_malformed_group_bad_gid_return_500(self, test_malformed_group_bad_gid_app):
+        response = test_malformed_group_bad_gid_app.get(
+            self.resource, expect_errors=True
+        )
+        assert response.status_int == 500

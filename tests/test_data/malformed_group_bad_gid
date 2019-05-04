@@ -1,0 +1,5 @@
+root:x:0:
+daemon:x:1:
+bin:x:OOPS_BAD_NON_NUMERIC_GID:
+adm:x:4:syslog,james
+dialout:x:20:james
