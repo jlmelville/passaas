@@ -65,7 +65,7 @@ class TestGetUserExists:
 
 class TestGetGroupDoesNotExist:
     def test_status(self, testapp):
-        response = testapp.get("/api/users/100", expect_errors=True)
+        response = testapp.get("/api/groups/100", expect_errors=True)
         assert response.status_int == 404
 
 
