@@ -206,7 +206,6 @@ class TestBadPasswd:
         response = test_malformed_passwd_too_few_elements_app.get(
             "/api/users", expect_errors=True
         )
-        print(response)
         assert response.status_int == 500
 
     def test_malformed_passwd_too_many_return_500(
