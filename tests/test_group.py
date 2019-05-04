@@ -62,3 +62,11 @@ class TestUpdateGroupFile:
         assert len(response.json) == 5
 
         # test_group_update restores original file
+
+
+class TestBadGroup:
+    """Tests for missing or malformed passwd files."""
+
+    def test_missing_group_return_500(self, test_missing_group_app):
+        response = test_missing_group_app.get("/api/groups", expect_errors=True)
+        assert response.status_int == 500

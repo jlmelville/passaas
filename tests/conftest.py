@@ -277,3 +277,37 @@ def group_update_app():
 def test_group_update_app(group_update_app):
     """A Webtest app with a group file intended to be updated."""
     return wt.TestApp(group_update_app)
+
+
+### Bad Groups
+
+
+class MissingGroupConfig(TestConfig):
+    """Configuration pointing to a missing group file."""
+
+    PRESERVE_CONTEXT_ON_EXCEPTION = False
+    GROUP_PATH = os.path.abspath(
+        # this file purposely doesn't exist
+        os.path.join(Config.PROJECT_ROOT, "tests", "test_data", "missing_group")
+    )
+
+
+@pytest.yield_fixture(scope="function")
+def missing_group_app():
+    """An application with a missing group file."""
+    _app = create_app(MissingGroupConfig)
+
+    ctx = _app.app.test_request_context()
+    ctx.push()
+
+    yield _app.app
+
+    ctx.pop()
+
+
+@pytest.fixture(scope="function")
+def test_missing_group_app(missing_group_app):
+    """A Webtest app with a missing group file."""
+    return wt.TestApp(missing_group_app)
+
+
