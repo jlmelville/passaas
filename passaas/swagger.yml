@@ -91,6 +91,26 @@ paths:
             $ref: '#/definitions/Group'
         404:
           description: Group does not exist
+  /groups/query:
+    get:
+      tags: [Groups]
+      operationId: passaas.controllers.group_controller.query_groups
+      summary: Get a list of groups matching the specified query
+      parameters:
+        - $ref: '#/parameters/gname'
+        - $ref: '#/parameters/qgid'
+        - $ref: '#/parameters/member'
+      responses:
+        200:
+          description: Returns all groups that match the query
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Group'
+        400:
+          description: Unknown or incorrectly specified query
+        404:
+          description: No groups matched the query
 
 parameters:
   uid:
@@ -140,6 +160,20 @@ parameters:
     description: Shell
     in: query
     type: string
+    required: false
+  gname:
+    name: name
+    description: Group name
+    in: query
+    type: string
+    required: false
+  member:
+    name: member
+    description: Name of users belonging to the group
+    in: query
+    type: array
+    items:
+      type: string
     required: false
 definitions:
   User:

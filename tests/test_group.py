@@ -69,6 +69,77 @@ class TestGetGroupDoesNotExist:
         assert response.status_int == 404
 
 
+class TestQueryGroup:
+    """Test GET /groups/query?name,gid,member"""
+
+    def test_query_name(self, testapp):
+        response = testapp.get("/api/groups/query?name=root")
+        assert response.status_int == 200
+        assert len(response.json) == 1
+        assert response.json[0]["name"] == "root"
+
+    def test_query_gid(self, testapp):
+        response = testapp.get("/api/groups/query?gid=2")
+        assert response.status_int == 200
+        assert len(response.json) == 1
+        assert response.json[0]["gid"] == 2
+
+    def test_query_member(self, testapp):
+        response = testapp.get(r"/api/groups/query?member=james")
+        assert response.status_int == 200
+        assert len(response.json) == 2
+        for result in response.json:
+            assert "james" in result["members"]
+        assert list(e["name"] for e in response.json) == ["adm", "dialout"]
+
+    def test_query_repeat_members(self, testapp):
+        response = testapp.get(r"/api/groups/query?member=james&member=syslog")
+        assert response.status_int == 200
+        assert len(response.json) == 1
+        for result in response.json:
+            for member in ["james", "syslog"]:
+                assert member in result["members"]
+
+    def test_query_repeat_members_comma_style(self, testapp):
+        """Same as the previous test, but use a different format for repeated query"""
+        response = testapp.get(r"/api/groups/query?member=james,syslog")
+        assert response.status_int == 200
+        assert len(response.json) == 1
+        for result in response.json:
+            for member in ["james", "syslog"]:
+                assert member in result["members"]
+
+    def test_query_two_args(self, testapp):
+        response = testapp.get(r"/api/groups/query?name=dialout&gid=20")
+        assert response.status_int == 200
+        assert len(response.json) == 1
+        assert response.json[0]["name"] == "dialout"
+        assert response.json[0]["gid"] == 20
+
+    def test_query_three_args(self, testapp):
+        response = testapp.get(r"/api/groups/query?name=adm&gid=4&member=syslog")
+        assert response.status_int == 200
+        assert len(response.json) == 1
+        assert response.json[0]["name"] == "adm"
+        assert response.json[0]["gid"] == 4
+        assert "syslog" in response.json[0]["members"]
+
+    def test_query_empty_returns_everything(self, testapp):
+        response = testapp.get("/api/groups/query")
+        assert response.status_int == 200
+        assert len(response.json) == 5
+
+    def test_unmatching_query_returns_404(self, testapp):
+        response = testapp.get("/api/groups/query?gid=42", expect_errors=True)
+        assert response.status_int == 404
+
+    def test_query_bad_parameter_returns_400(self, testapp):
+        response = testapp.get(
+            r"/api/groups/query?comment=Mailing%20List%20Manager", expect_errors=True
+        )
+        assert response.status_int == 400
+
+
 class TestUpdateGroupFile:
     """Test that changes to a group file are reflected in the response"""
 
