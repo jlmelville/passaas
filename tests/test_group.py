@@ -40,6 +40,35 @@ class TestGetAllGroups:
         ]
 
 
+@pytest.fixture(scope="function")
+def group_exists_response(testapp):
+    """reads the equivalent of: adm:x:4:syslog,james"""
+    return testapp.get("/api/groups/4")
+
+
+class TestGetUserExists:
+    def test_status(self, group_exists_response):
+        assert group_exists_response.status_int == 200
+
+    def test_response_length(self, group_exists_response):
+        assert len(group_exists_response.json) == 3
+
+    def test_name(self, group_exists_response):
+        assert group_exists_response.json["name"] == "adm"
+
+    def test_gid(self, group_exists_response):
+        assert group_exists_response.json["gid"] == 4
+
+    def test_members(self, group_exists_response):
+        assert group_exists_response.json["members"] == ["syslog", "james"]
+
+
+class TestGetGroupDoesNotExist:
+    def test_status(self, testapp):
+        response = testapp.get("/api/users/100", expect_errors=True)
+        assert response.status_int == 404
+
+
 class TestUpdateGroupFile:
     """Test that changes to a group file are reflected in the response"""
 

@@ -75,11 +75,31 @@ paths:
               $ref: '#/definitions/Group'
         404:
           description: No groups
+  /groups/{gid}:
+    get:
+      tags: [Groups]
+      operationId: passaas.controllers.group_controller.fetch_group
+      summary: Get a single group
+      parameters:
+        - $ref: '#/parameters/gid'
+      responses:
+        200:
+          description: Return user
+          schema:
+            $ref: '#/definitions/Group'
+        404:
+          description: Group does not exist
 
 parameters:
   uid:
     name: uid
     description: User identifier
+    in: path
+    type: integer
+    required: true
+  gid:
+    name: gid
+    description: Group identifier
     in: path
     type: integer
     required: true
