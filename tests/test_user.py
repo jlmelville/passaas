@@ -79,17 +79,27 @@ class TestGetUserExists:
     def test_uid(self, user_exists_response):
         assert user_exists_response.json["uid"] == 1
 
-    def test_gids(self, user_exists_response):
+    def test_gid(self, user_exists_response):
         assert user_exists_response.json["gid"] == 1
 
-    def test_comments(self, user_exists_response):
+    def test_comment(self, user_exists_response):
         assert user_exists_response.json["comment"] == "daemon"
 
-    def test_homes(self, user_exists_response):
+    def test_home(self, user_exists_response):
         assert user_exists_response.json["home"] == "/usr/sbin"
 
-    def test_shells(self, user_exists_response):
+    def test_shell(self, user_exists_response):
         assert user_exists_response.json["shell"] == "/usr/sbin/nologin"
+
+
+@pytest.fixture(scope="function")
+def user_does_not_exist_response(testapp):
+    return testapp.get("/api/users/100", expect_errors=True)
+
+
+class TestGetUserDoesNotExists:
+    def test_status(self, user_does_not_exist_response):
+        assert user_does_not_exist_response.status_int == 404
 
 
 class TestUpdatePasswdFile:
