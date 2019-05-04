@@ -23,6 +23,8 @@ paths:
             type: array
             items:
               $ref: '#/definitions/User'
+        404:
+          description: No users
   /users/{uid}:
     get:
       tags: [Users]

@@ -234,3 +234,7 @@ class TestBadPasswd:
             "/api/users", expect_errors=True
         )
         assert response.status_int == 500
+
+    def test_empty_passwd_return_404(self, test_empty_passwd_app):
+        response = test_empty_passwd_app.get("/api/users", expect_errors=True)
+        assert response.status_int == 404

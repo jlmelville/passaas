@@ -203,3 +203,31 @@ def malformed_passwd_bad_gid_app():
 def test_malformed_passwd_bad_gid_app(malformed_passwd_bad_gid_app):
     """A Webtest app with a bad gid passwd file."""
     return wt.TestApp(malformed_passwd_bad_gid_app)
+
+
+class EmptyPasswdConfig(TestConfig):
+    """Configuration pointing to an empty passwd file."""
+
+    PRESERVE_CONTEXT_ON_EXCEPTION = False
+    PASSWD_PATH = os.path.abspath(
+        os.path.join(Config.PROJECT_ROOT, "tests", "test_data", "empty_passwd")
+    )
+
+
+@pytest.yield_fixture(scope="function")
+def empty_passwd_app():
+    """An application with an empty passwd file."""
+    _app = create_app(EmptyPasswdConfig)
+
+    ctx = _app.app.test_request_context()
+    ctx.push()
+
+    yield _app.app
+
+    ctx.pop()
+
+
+@pytest.fixture(scope="function")
+def test_empty_passwd_app(empty_passwd_app):
+    """A Webtest app with an empty passwd file."""
+    return wt.TestApp(empty_passwd_app)
