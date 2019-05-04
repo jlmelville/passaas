@@ -78,3 +78,11 @@ class TestBadGroup:
     def test_empty_group_return_404(self, test_empty_group_app):
         response = test_empty_group_app.get(self.resource, expect_errors=True)
         assert response.status_int == 404
+
+    def test_malformed_group_too_few_return_500(
+        self, test_malformed_group_too_few_elements_app
+    ):
+        response = test_malformed_group_too_few_elements_app.get(
+            self.resource, expect_errors=True
+        )
+        assert response.status_int == 500
