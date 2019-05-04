@@ -55,13 +55,13 @@ def passwd_update_app():
     ctx.pop()
 
 
-### Bad Passwords
-
-
 @pytest.fixture(scope="function")
 def test_passwd_update_app(passwd_update_app):
     """A Webtest app with a passwd file intended to be updated."""
     return wt.TestApp(passwd_update_app)
+
+
+### Bad Passwords
 
 
 class MissingPasswdConfig(TestConfig):
