@@ -92,14 +92,10 @@ class TestGetUserExists:
         assert user_exists_response.json["shell"] == "/usr/sbin/nologin"
 
 
-@pytest.fixture(scope="function")
-def user_does_not_exist_response(testapp):
-    return testapp.get("/api/users/100", expect_errors=True)
-
-
-class TestGetUserDoesNotExists:
-    def test_status(self, user_does_not_exist_response):
-        assert user_does_not_exist_response.status_int == 404
+class TestGetUserDoesNotExist:
+    def test_status(self, testapp):
+        response = testapp.get("/api/users/100", expect_errors=True)
+        assert response.status_int == 404
 
 
 class TestQueryUser:
