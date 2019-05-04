@@ -28,8 +28,8 @@ This will launch the app at `localhost:9090`.
 To override the host and port:
 
 ```bash
-# listen at 127.0.0.1:5000
-python app.py --host=127.0.0.1 --port=5000
+# listen on all assigned IPs on port 5000
+python app.py --host=0.0.0.0 --port=5000
 ```
 
 ### Specifying the `passwd` file
