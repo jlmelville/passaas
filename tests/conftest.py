@@ -311,3 +311,32 @@ def test_missing_group_app(missing_group_app):
     return wt.TestApp(missing_group_app)
 
 
+class EmptyGroupConfig(TestConfig):
+    """Configuration pointing to an empty group file."""
+
+    PRESERVE_CONTEXT_ON_EXCEPTION = False
+    GROUP_PATH = os.path.abspath(
+        os.path.join(Config.PROJECT_ROOT, "tests", "test_data", "empty_group")
+    )
+
+
+@pytest.yield_fixture(scope="function")
+def empty_group_app():
+    """An application with an empty passwd file."""
+    _app = create_app(EmptyGroupConfig)
+
+    ctx = _app.app.test_request_context()
+    ctx.push()
+
+    yield _app.app
+
+    ctx.pop()
+
+
+@pytest.fixture(scope="function")
+def test_empty_group_app(empty_group_app):
+    """A Webtest app with an empty group file."""
+    return wt.TestApp(empty_group_app)
+
+
+# class MalformedPasswdTooFewElementsConfig(TestConfig):

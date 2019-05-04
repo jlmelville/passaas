@@ -65,8 +65,16 @@ class TestUpdateGroupFile:
 
 
 class TestBadGroup:
-    """Tests for missing or malformed passwd files."""
+    """Tests for missing or malformed group files."""
+
+    @classmethod
+    def setup_class(cls):
+        cls.resource = "/api/groups"
 
     def test_missing_group_return_500(self, test_missing_group_app):
-        response = test_missing_group_app.get("/api/groups", expect_errors=True)
+        response = test_missing_group_app.get(self.resource, expect_errors=True)
         assert response.status_int == 500
+
+    def test_empty_group_return_404(self, test_empty_group_app):
+        response = test_empty_group_app.get(self.resource, expect_errors=True)
+        assert response.status_int == 404
