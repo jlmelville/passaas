@@ -27,6 +27,33 @@ def testapp(app):
     return wt.TestApp(app)
 
 
+class PasswdUpdateConfig(TestConfig):
+    """Configuration pointing to a passwd file intended to be updated between calls."""
+
+    PASSWD_PATH = os.path.abspath(
+        os.path.join(Config.PROJECT_ROOT, "tests", "test_data", "passwd4")
+    )
+
+
+@pytest.yield_fixture(scope="function")
+def passwd_update_app():
+    """An application with a passwd file intended to be updated."""
+    _app = create_app(PasswdUpdateConfig)
+
+    ctx = _app.app.test_request_context()
+    ctx.push()
+
+    yield _app.app
+
+    ctx.pop()
+
+
+@pytest.fixture(scope="function")
+def test_passwd_update_app(passwd_update_app):
+    """A Webtest app with a passwd file intended to be updated."""
+    return wt.TestApp(passwd_update_app)
+
+
 class MissingPasswdConfig(TestConfig):
     """Configuration pointing to a missing passwd file."""
 

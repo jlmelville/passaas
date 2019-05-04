@@ -1,3 +1,7 @@
+import os
+import shutil
+
+from flask import current_app
 import pytest
 import webtest as wt
 
@@ -57,7 +61,34 @@ class TestGetAllUsers:
         ]
 
 
+class TestUpdatePasswdFile:
+    """Test that changes to a passwd file are reflected in the response"""
+
+    def test_response_reflects_change_to_passwd(self, test_passwd_update_app):
+        # Establish that the file is in the expected initial state with 4 entries
+        response = test_passwd_update_app.get("/api/users")
+        assert response.status_int == 200
+        assert len(response.json) == 4
+
+        # copy larger file over the original
+        dest = current_app.config["PASSWD_PATH"]
+        dest_dir = os.path.dirname(dest)
+        src = os.path.abspath(os.path.join(dest_dir, "passwd"))
+        shutil.copyfile(src, dest)
+        try:
+            response = test_passwd_update_app.get("/api/users")
+            assert response.status_int == 200
+            # there is now one more item in the result
+            assert len(response.json) == 5
+        finally:
+            # clean up by copying back over a copy of the original file
+            src = os.path.abspath(os.path.join(dest_dir, "passwd4.orig"))
+            shutil.copyfile(src, dest)
+
+
 class TestBadPasswd:
+    """Tests for missing or malformed passwd files."""
+
     def test_missing_passwd_returns500(self, test_missing_passwd_app):
         response = test_missing_passwd_app.get("/api/users", expect_errors=True)
         assert response.status_int == 500
