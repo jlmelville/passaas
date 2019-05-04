@@ -61,6 +61,37 @@ class TestGetAllUsers:
         ]
 
 
+@pytest.fixture(scope="function")
+def user_exists_response(testapp):
+    return testapp.get("/api/users/1")
+
+
+class TestGetUserExists:
+    def test_status(self, user_exists_response):
+        assert user_exists_response.status_int == 200
+
+    def test_response_length(self, user_exists_response):
+        assert len(user_exists_response.json) == 6
+
+    def test_name(self, user_exists_response):
+        assert user_exists_response.json["name"] == "daemon"
+
+    def test_uid(self, user_exists_response):
+        assert user_exists_response.json["uid"] == 1
+
+    def test_gids(self, user_exists_response):
+        assert user_exists_response.json["gid"] == 1
+
+    def test_comments(self, user_exists_response):
+        assert user_exists_response.json["comment"] == "daemon"
+
+    def test_homes(self, user_exists_response):
+        assert user_exists_response.json["home"] == "/usr/sbin"
+
+    def test_shells(self, user_exists_response):
+        assert user_exists_response.json["shell"] == "/usr/sbin/nologin"
+
+
 class TestUpdatePasswdFile:
     """Test that changes to a passwd file are reflected in the response"""
 

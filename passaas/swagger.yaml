@@ -26,7 +26,28 @@ paths:
                 type: array
                 items:
                   $ref: '#/definitions/User'
+  /users/{uid}:
+    get:
+      tags: [Users]
+      operationId: passaas.controllers.user_controller.fetch_user
+      summary: Get a single user
+      parameters:
+        - $ref: '#/parameters/uid'
+      responses:
+        200:
+          description: Return user
+          schema:
+            $ref: '#/definitions/User'
+        404:
+          description: User does not exist
 
+parameters:
+  uid:
+    name: uid
+    description: User identifier
+    in: path
+    type: integer
+    required: true
 definitions:
   User:
     type: object
