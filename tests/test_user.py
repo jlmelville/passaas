@@ -102,6 +102,74 @@ class TestGetUserDoesNotExists:
         assert user_does_not_exist_response.status_int == 404
 
 
+class TestQueryUser:
+    """Test GET /users/query?name,uid,gid,comment,home,shell"""
+
+    def test_query_name(self, testapp):
+        response = testapp.get("/api/users/query?name=root")
+        assert response.status_int == 200
+        assert len(response.json) == 1
+        assert response.json[0]["name"] == "root"
+
+    def test_query_uid(self, testapp):
+        response = testapp.get("/api/users/query?uid=1")
+        assert response.status_int == 200
+        assert len(response.json) == 1
+        assert response.json[0]["uid"] == 1
+
+    def test_query_gid(self, testapp):
+        response = testapp.get("/api/users/query?gid=2")
+        assert response.status_int == 200
+        assert len(response.json) == 1
+        assert response.json[0]["gid"] == 2
+
+    def test_query_comment(self, testapp):
+        response = testapp.get(r"/api/users/query?comment=Mailing%20List%20Manager")
+        assert response.status_int == 200
+        assert len(response.json) == 1
+        assert response.json[0]["comment"] == "Mailing List Manager"
+
+    def test_query_home(self, testapp):
+        response = testapp.get(r"/api/users/query?home=%2Fbin")
+        assert response.status_int == 200
+        assert len(response.json) == 2
+        assert response.json[0]["home"] == "/bin"
+
+    def test_query_shell(self, testapp):
+        response = testapp.get(r"/api/users/query?shell=%2Fusr%2Fsbin%2Fnologin")
+        assert response.status_int == 200
+        assert len(response.json) == 3
+        assert list({e["shell"] for e in response.json}) == ["/usr/sbin/nologin"]
+
+    def test_query_two_args(self, testapp):
+        response = testapp.get(
+            r"/api/users/query?home=%2Fbin&shell=%2Fusr%2Fsbin%2Fnologin"
+        )
+        assert response.status_int == 200
+        assert len(response.json) == 1
+        assert response.json[0]["home"] == "/bin"
+        assert response.json[0]["shell"] == "/usr/sbin/nologin"
+
+    def test_query_three_args(self, testapp):
+        response = testapp.get(
+            r"/api/users/query?gid=2&home=%2Fbin&shell=%2Fusr%2Fsbin%2Fnologin"
+        )
+        assert response.status_int == 200
+        assert len(response.json) == 1
+        assert response.json[0]["home"] == "/bin"
+        assert response.json[0]["shell"] == "/usr/sbin/nologin"
+        assert response.json[0]["gid"] == 2
+
+    def test_query_empty_returns_everything(self, testapp):
+        response = testapp.get("/api/users/query")
+        assert response.status_int == 200
+        assert len(response.json) == 5
+
+    def test_unmatching_query_returns_404(self, testapp):
+        response = testapp.get("/api/users/query?name=root&gid=1", expect_errors=True)
+        assert response.status_int == 404
+
+
 class TestUpdatePasswdFile:
     """Test that changes to a passwd file are reflected in the response"""
 
@@ -130,11 +198,11 @@ class TestUpdatePasswdFile:
 class TestBadPasswd:
     """Tests for missing or malformed passwd files."""
 
-    def test_missing_passwd_returns500(self, test_missing_passwd_app):
+    def test_missing_passwd_return_500(self, test_missing_passwd_app):
         response = test_missing_passwd_app.get("/api/users", expect_errors=True)
         assert response.status_int == 500
 
-    def test_malformed_passwd_too_few_returns500(
+    def test_malformed_passwd_too_few_return_500(
         self, test_malformed_passwd_too_few_elements_app
     ):
         response = test_malformed_passwd_too_few_elements_app.get(
@@ -143,7 +211,7 @@ class TestBadPasswd:
         print(response)
         assert response.status_int == 500
 
-    def test_malformed_passwd_too_many_returns500(
+    def test_malformed_passwd_too_many_return_500(
         self, test_malformed_passwd_too_many_elements_app
     ):
         response = test_malformed_passwd_too_many_elements_app.get(
@@ -151,7 +219,7 @@ class TestBadPasswd:
         )
         assert response.status_int == 500
 
-    def test_malformed_passwd_bad_uid_returns500(
+    def test_malformed_passwd_bad_uid_return_500(
         self, test_malformed_passwd_bad_uid_app
     ):
         response = test_malformed_passwd_bad_uid_app.get(
@@ -159,7 +227,7 @@ class TestBadPasswd:
         )
         assert response.status_int == 500
 
-    def test_malformed_passwd_bad_gid_returns500(
+    def test_malformed_passwd_bad_gid_return_500(
         self, test_malformed_passwd_bad_gid_app
     ):
         response = test_malformed_passwd_bad_gid_app.get(

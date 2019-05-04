@@ -18,14 +18,11 @@ paths:
       description: A list of all users on the system, as defined in the passwd file
       responses:
         200:
-          description: Returns users
+          description: Returns all users
           schema:
-            type: object
-            properties:
-              users:
-                type: array
-                items:
-                  $ref: '#/definitions/User'
+            type: array
+            items:
+              $ref: '#/definitions/User'
   /users/{uid}:
     get:
       tags: [Users]
@@ -40,6 +37,27 @@ paths:
             $ref: '#/definitions/User'
         404:
           description: User does not exist
+  /users/query:
+    get:
+      tags: [Users]
+      operationId: passaas.controllers.user_controller.query_users
+      summary: Get a list of users matching the specified query
+      parameters:
+        - $ref: '#/parameters/name'
+        - $ref: '#/parameters/quid'
+        - $ref: '#/parameters/qgid'
+        - $ref: '#/parameters/comment'
+        - $ref: '#/parameters/home'
+        - $ref: '#/parameters/shell'
+      responses:
+        200:
+          description: Returns all users that match the query
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/User'
+        404:
+          description: No users matched the query
 
 parameters:
   uid:
@@ -48,6 +66,42 @@ parameters:
     in: path
     type: integer
     required: true
+  name:
+    name: name
+    description: User name
+    in: query
+    type: string
+    required: false
+  quid:
+    name: uid
+    description: User identifier
+    in: query
+    type: integer
+    required: false
+  qgid:
+    name: gid
+    description: Group identifier
+    in: query
+    type: integer
+    required: false
+  comment:
+    name: comment
+    description: Comment
+    in: query
+    type: string
+    required: false
+  home:
+    name: home
+    description: Home directory
+    in: query
+    type: string
+    required: false
+  shell:
+    name: shell
+    description: Shell
+    in: query
+    type: string
+    required: false
 definitions:
   User:
     type: object
@@ -59,12 +113,12 @@ definitions:
         readOnly: true
       uid:
         type: integer
-        description: Unique identifier
+        description: User identifier
         example: 123
         readOnly: true
       gid:
         type: integer
-        description: Group id
+        description: Group identifier
         example: 123
         readOnly: true
       comment:
