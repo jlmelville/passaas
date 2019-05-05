@@ -136,9 +136,12 @@ The instance folder approach works unchanged.
 
 ## See Also
 
-Examples of using connexion with unit testing are incredibly thin on the ground.
-<https://github.com/hirose31/connexion-tiny-petstore> was invaluable in getting going. Also
-[pytest-azurepipelines](https://pypi.org/project/pytest-azurepipelines/) made publishing test
+* Examples of using connexion with unit testing are incredibly thin on the ground.
+<https://github.com/hirose31/connexion-tiny-petstore> was invaluable in getting going.
+
+* Testing was done with [WebTest](https://github.com/Pylons/webtest).
+
+* [pytest-azurepipelines](https://pypi.org/project/pytest-azurepipelines/) made publishing test
 results on Azure pipelines very easy.
 
 ## License
