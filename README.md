@@ -23,13 +23,13 @@ Using Flask's built-in server:
 python app.py
 ```
 
-This will launch the app at `localhost:9090`.
+This will launch the app at `localhost:5000`.
 
 To override the host and port:
 
 ```bash
-# listen on all assigned IPs on port 5000
-python app.py --host=0.0.0.0 --port=5000
+# listen on all assigned IPs on port 8080
+python app.py --host=0.0.0.0 --port=8080
 ```
 
 ### Specifying the `passwd` file
@@ -40,17 +40,17 @@ By default the `passwd` file is looked for at `/etc/passwd`. To use a different 
 python app.py --passwd=/path/to/some/other/passwd
 ```
 
-## Documentation
+## API Documentation
 
 Assuming the default host and port, the Swagger documentation for the API can be found at:
 
 ```bash
-http://localhost:9090/api/ui/
+http://localhost:5000/api/ui/
 ```
 
 ## Tests
 
-To run the unit  tests:
+To run the unit tests:
 
 ```shell
 pip install -r test-requirements.txt
