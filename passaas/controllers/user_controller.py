@@ -19,7 +19,7 @@ def fetch_all_users():
 
 def fetch_user(uid):
     """
-    Returns the user with the specified uid, or 404 if there aren't any.
+    Returns the user with the specified uid, or 404 if there isn't one.
     """
     users = find_users(uid=uid)
     if users:
