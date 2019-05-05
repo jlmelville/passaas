@@ -2,6 +2,8 @@ language: python
 dist: xenial
 sudo: false
 python:
+  - "3.4"
+  - "3.5"
   - "3.6"
   - "3.7"
 env:
@@ -12,6 +14,10 @@ env:
     - COVERAGE="true"
 matrix:
   exclude:
+    - python: "3.4"
+      env: COVERAGE="true"
+    - python: "3.5"
+      env: COVERAGE="true"  
     - python: "3.6"
       env: COVERAGE="true"
 install: source ci/install.sh
