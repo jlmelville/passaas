@@ -68,3 +68,6 @@ target/
 
 # Flask instance config
 instance/*
+
+# Visual Studio Code
+settings.json
