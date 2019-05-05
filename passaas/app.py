@@ -1,10 +1,16 @@
-import connexion
+"""
+The Connexion Application
+"""
 import logging
+import connexion
 
 from passaas.config import ProdConfig
 
 
 def create_app(config_object=ProdConfig):
+    """
+    The application factory for the connexion app, created with the specified configuration.
+    """
     logging.basicConfig(level=logging.DEBUG)
 
     app = connexion.App(__name__, specification_dir=config_object.APP_DIR)
