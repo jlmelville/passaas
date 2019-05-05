@@ -74,8 +74,6 @@ python app.py --passwd=/path/to/some/other/passwd --group=/path/to/some/other/gr
 
 If for some reason you like to really complicate life for yourself and you use an instance folder *and* provide command-line options, be aware that the instance folder configuration overrides any command-line option provided.
 
-
-
 ## Tests
 
 To run the unit tests:

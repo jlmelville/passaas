@@ -13,9 +13,12 @@ def create_app(config_object=ProdConfig):
 
     # Configuration from config.py
     app.app.config.from_object(config_object)
-    # Allow configuration override from the instance folder
-    # http://flask.pocoo.org/docs/1.0/config/#instance-folders
-    app.app.config.from_pyfile("config.cfg", silent=True)
+
+    # Ignore any configuration override in test configuration
+    if app.app.config["ENV"] != "test":
+        # Allow configuration override from the instance folder
+        # http://flask.pocoo.org/docs/1.0/config/#instance-folders
+        app.app.config.from_pyfile("config.cfg", silent=True)
 
     # strict_validation means that unexpected query parameters will return 400
     app.add_api("swagger.yml", strict_validation=True)
