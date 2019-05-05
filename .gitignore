@@ -65,3 +65,6 @@ target/
 
 # local
 /data/*
+
+# Flask instance config
+instance/*
