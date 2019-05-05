@@ -1,0 +1,11 @@
+version: "2"
+languages:
+  Python: true
+engines:
+  sonar-python:
+    enabled: true
+    config:
+      tests_patterns:
+        - tests/**
+  bandit:
+    enabled: true
