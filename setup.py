@@ -18,8 +18,8 @@ with open(path.join(here, "README.md"), encoding="utf-8") as f:
 # Version will be parsed (via regex) from the swagger yaml, so we only have
 # to maintain it in one place.
 version = "0.0.1"
-version_pattern = re.compile(r'^\s*version: "(.+)"')
-with open(path.join(here, "passaas", "swagger.yml")) as f:
+version_pattern = re.compile(r"^\s*version: (.+)")
+with open(path.join(here, "passaas", "openapi.yaml")) as f:
     for line in f:
         result = version_pattern.search(line)
         if result is not None:

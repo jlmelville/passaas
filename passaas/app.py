@@ -20,6 +20,6 @@ def create_app(config_object=ProdConfig):
         app.app.config.from_pyfile("config.cfg", silent=True)
 
     # strict_validation means that unexpected query parameters will return 400
-    app.add_api("swagger.yml", strict_validation=True)
+    app.add_api("openapi.yaml", strict_validation=True)
 
     return app

@@ -1,0 +1,275 @@
+openapi: 3.0.0
+info:
+  description: Passaas API
+  version: 0.1.0
+  title: Passwd as a Service
+paths:
+  /users:
+    get:
+      operationId: passaas.controllers.user_controller.fetch_all_users
+      tags:
+        - Users
+      summary: A list of all users on the system
+      description: A list of all users on the system, as defined in the passwd file
+      responses:
+        "200":
+          description: Returns all users
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/User"
+        "404":
+          description: No users
+  "/users/{uid}":
+    get:
+      tags:
+        - Users
+      operationId: passaas.controllers.user_controller.fetch_user
+      summary: Get a single user
+      parameters:
+        - $ref: "#/components/parameters/uid"
+      responses:
+        "200":
+          description: Return user
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+        "404":
+          description: User does not exist
+  /users/query:
+    get:
+      tags:
+        - Users
+      operationId: passaas.controllers.user_controller.query_users
+      summary: Get a list of users matching the specified query
+      parameters:
+        - $ref: "#/components/parameters/name"
+        - $ref: "#/components/parameters/quid"
+        - $ref: "#/components/parameters/qgid"
+        - $ref: "#/components/parameters/comment"
+        - $ref: "#/components/parameters/home"
+        - $ref: "#/components/parameters/shell"
+      responses:
+        "200":
+          description: Returns all users that match the query
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/User"
+        "400":
+          description: Unknown or incorrectly specified query
+        "404":
+          description: No users matched the query
+  "/users/{uid}/groups":
+    get:
+      tags:
+        - Users
+        - Groups
+      operationId: passaas.controllers.user_controller.fetch_groups_for_user
+      summary: Get the groups for a single user
+      parameters:
+        - $ref: "#/components/parameters/uid"
+      responses:
+        "200":
+          description: Return groups
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Group"
+        "404":
+          description: User does not exist or user is not a member of any groups.
+  /groups:
+    get:
+      operationId: passaas.controllers.group_controller.fetch_all_groups
+      tags:
+        - Groups
+      summary: A list of all groups on the system
+      description: A list of all groups on the system, as defined in the group file
+      responses:
+        "200":
+          description: Returns all groups
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Group"
+        "404":
+          description: No groups
+  "/groups/{gid}":
+    get:
+      tags:
+        - Groups
+      operationId: passaas.controllers.group_controller.fetch_group
+      summary: Get a single group
+      parameters:
+        - $ref: "#/components/parameters/gid"
+      responses:
+        "200":
+          description: Return user
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Group"
+        "404":
+          description: Group does not exist
+  /groups/query:
+    get:
+      tags:
+        - Groups
+      operationId: passaas.controllers.group_controller.query_groups
+      summary: Get a list of groups matching the specified query
+      parameters:
+        - $ref: "#/components/parameters/gname"
+        - $ref: "#/components/parameters/qgid"
+        - $ref: "#/components/parameters/member"
+      responses:
+        "200":
+          description: Returns all groups that match the query
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Group"
+        "400":
+          description: Unknown or incorrectly specified query
+        "404":
+          description: No groups matched the query
+servers:
+  - url: /api
+components:
+  parameters:
+    uid:
+      name: uid
+      description: User identifier
+      in: path
+      required: true
+      schema:
+        type: integer
+    gid:
+      name: gid
+      description: Group identifier
+      in: path
+      required: true
+      schema:
+        type: integer
+    name:
+      name: name
+      description: User name
+      in: query
+      required: false
+      schema:
+        type: string
+    quid:
+      name: uid
+      description: User identifier
+      in: query
+      required: false
+      schema:
+        type: integer
+    qgid:
+      name: gid
+      description: Group identifier
+      in: query
+      required: false
+      schema:
+        type: integer
+    comment:
+      name: comment
+      description: Comment
+      in: query
+      required: false
+      schema:
+        type: string
+    home:
+      name: home
+      description: Home directory
+      in: query
+      required: false
+      schema:
+        type: string
+    shell:
+      name: shell
+      description: Shell
+      in: query
+      required: false
+      schema:
+        type: string
+    gname:
+      name: name
+      description: Group name
+      in: query
+      required: false
+      schema:
+        type: string
+    member:
+      name: member
+      description: Name of users belonging to the group
+      in: query
+      required: false
+      schema:
+        type: array
+        items:
+          type: string
+  schemas:
+    User:
+      type: object
+      properties:
+        name:
+          type: string
+          description: User name
+          example: root
+          readOnly: true
+        uid:
+          type: integer
+          description: User identifier
+          example: 123
+          readOnly: true
+        gid:
+          type: integer
+          description: Group identifier
+          example: 123
+          readOnly: true
+        comment:
+          type: string
+          description: Comment
+          example: root
+          readOnly: true
+        home:
+          type: string
+          description: home directory
+          example: /root
+          readOnly: true
+        shell:
+          type: string
+          description: shell
+          example: /bin/bash
+          readOnly: true
+    Group:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Group name
+          example: adm
+          readOnly: true
+        gid:
+          type: integer
+          description: Group identifier
+          example: 4
+          readOnly: true
+        members:
+          type: array
+          items:
+            type: string
+            description: User in the group
+            example: syslog
+            readOnly: true
