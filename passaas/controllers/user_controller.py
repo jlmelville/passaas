@@ -3,7 +3,7 @@ User controller.
 Functions mapping from HTTP requests for user-related resources to model data.
 """
 
-from passaas.models.user import read_passwd
+from passaas.models.user import read_passwd, find_users
 from passaas.models.group import read_group
 
 
@@ -21,9 +21,7 @@ def fetch_user(uid):
     """
     Returns the user with the specified uid, or 404 if there aren't any.
     """
-    uid = int(uid)
-    users = read_passwd()
-    users = [u for u in users if u.uid == uid]
+    users = find_users(read_passwd(), uid)
     if users:
         return users[0]._asdict()
     return ("Not found", 404)
@@ -39,8 +37,7 @@ def query_users(name=None, uid=None, gid=None, comment=None, home=None, shell=No
     if name:
         users = [u for u in users if u.name == name]
     if uid:
-        uid = int(uid)
-        users = [u for u in users if u.uid == uid]
+        users = find_users(users, uid)
     if gid:
         gid = int(gid)
         users = [u for u in users if u.gid == gid]
@@ -63,9 +60,7 @@ def fetch_groups_for_user(uid):
     exists, but does not belong to any groups.
     """
     # Get the user with the specified uid
-    uid = int(uid)
-    users = read_passwd()
-    users = [u for u in users if u.uid == uid]
+    users = find_users(read_passwd(), uid)
     if not users:
         return ("Not found", 404)
     user = users[0]

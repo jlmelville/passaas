@@ -19,6 +19,13 @@ class User(NamedTuple):
     shell: str
 
 
+def find_users(users, uid):
+    """
+    Returns list of users with the specified uid, or an empty list if none match.
+    """
+    return [u for u in users if u.uid == uid]
+
+
 def read_passwd():
     """
     Reads the passwd file and returns a list of Users.
