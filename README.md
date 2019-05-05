@@ -9,6 +9,10 @@
 
 A REST service that provides a (read-only) REST interface to `passwd` and `group` files. Built using [connexion](https://github.com/zalando/connexion).
 
+## Prerequisites
+
+Python 3.6 or higher.
+
 ## Installing
 
 ```bash
