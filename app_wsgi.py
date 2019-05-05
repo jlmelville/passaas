@@ -1,5 +1,7 @@
-# Example usage passing non-standard locations for passwd and group
-# uwsgi --http :8080 -w app-wsgi -p 16 --set passwd=/tmp/passwd --set group=/tmp/group
+"""
+Example usage passing non-standard locations for passwd and group:
+uwsgi --http :8080 --wsgi app_wsgi --processes 2 --set passwd=/tmp/passwd --set group=/tmp/group
+"""
 
 import uwsgi
 

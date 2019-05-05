@@ -85,10 +85,10 @@ python setup.py test
 
 ## Deployment
 
-See the `app-wsgi.py` file for something that can be used with [uwsgi](http://projects.unbit.it/uwsgi/). To deploy on port 8080 with 2 workers:
+See the `app_wsgi.py` file for something that can be used as a WSGI module with [uwsgi](http://projects.unbit.it/uwsgi/). To deploy on port 8080 with 2 workers:
 
 ```bash
-uwsgi --http :8080 -w app-wsgi -p 2
+uwsgi --http :8080 --wsgi app_wsgi --processes 2
 ```
 
 There are also command line options to override the default `passwd` and `group` locations: add the arguments `--set passwd=/path/to/passwd` and `--set group=/path/to/group` to the above invocation. The instance folder approach works unchanged.
