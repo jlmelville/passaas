@@ -4,6 +4,7 @@ Functions mapping from HTTP requests for group-related resources to model data.
 """
 
 from passaas.models.group import find_groups
+from passaas.controllers import to_response
 
 
 def fetch_all_groups():
@@ -11,9 +12,7 @@ def fetch_all_groups():
     Returns all groups or 404 if there aren't any.
     """
     groups = find_groups()
-    if groups:
-        return [g._asdict() for g in groups]
-    return ("No groups", 404)
+    return to_response(groups, "No groups")
 
 
 def fetch_group(gid):
@@ -35,6 +34,4 @@ def query_groups(name=None, gid=None, member=None):
     """
     groups = find_groups(name=name, gid=gid, member=member)
 
-    if groups:
-        return [g._asdict() for g in groups]
-    return ("No groups matched the query", 404)
+    return to_response(groups, "No groups matched the query")

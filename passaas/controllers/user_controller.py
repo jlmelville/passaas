@@ -5,6 +5,7 @@ Functions mapping from HTTP requests for user-related resources to model data.
 
 from passaas.models.user import find_users
 from passaas.models.group import find_groups
+from passaas.controllers import to_response
 
 
 def fetch_all_users():
@@ -12,9 +13,7 @@ def fetch_all_users():
     Returns all users, or 404 if there aren't any.
     """
     users = find_users()
-    if users:
-        return [u._asdict() for u in users]
-    return ("No users", 404)
+    return to_response(users, "No users")
 
 
 def fetch_user(uid):
@@ -37,9 +36,7 @@ def query_users(name=None, uid=None, gid=None, comment=None, home=None, shell=No
         name=name, uid=uid, gid=gid, comment=comment, home=home, shell=shell
     )
 
-    if users:
-        return [u._asdict() for u in users]
-    return ("No users matched the query", 404)
+    return to_response(users, "No users matched the query")
 
 
 def fetch_groups_for_user(uid):
@@ -56,6 +53,5 @@ def fetch_groups_for_user(uid):
 
     # Get the groups for that user (if any)
     groups = find_groups(member=[user.name])
-    if groups:
-        return [g._asdict() for g in groups]
-    return ("No groups", 404)
+
+    return to_response(groups, "No groups")
