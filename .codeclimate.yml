@@ -4,7 +4,10 @@ languages:
 exclude_paths:
     - "tests/*"
 plugins:
-    sonar-python:
-      enabled: true
-    bandit:
-      enabled: true
+  sonar-python:
+    enabled: true
+    config:
+      tests_patterns:
+        - tests/**
+  bandit:
+    enabled: true
