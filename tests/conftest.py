@@ -1,5 +1,5 @@
 """Defines fixtures available to all tests."""
-# pylint: disable=redefined-outer-name
+# pylint: disable=redefined-outer-name,too-few-public-methods
 import os
 import shutil
 

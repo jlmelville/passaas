@@ -1,7 +1,35 @@
+# pylint: disable=too-few-public-methods
+"""
+Connexion Configuration.
+
+Rather than edit this file, you should prefer to add a config.cfg file to the instance folder.
+See the root app.py file for how this is used. The instance folder is located in one of two
+places:
+
+* if you haven't pip installed this package:
+    /instance
+        config.cfg <--- your config file
+    /passaas
+        config.py <--- this file
+* if you have installed this package (e.g. by "pip install ."):
+    /$PREFIX
+        /var
+            /passaas.app-instance
+                config.cfg <--- your config file
+$PREFIX is whatever sys.prefix says it is. In a venv, it's /path/to/venv/var, so the full path to
+your config.cfg would be /path/to/venv/var/passaas.app-instance/config.cfg
+
+Some example config.cfg file entries are:
+
+PASSWD_PATH = /abs/path/to/passwd
+GROUP_PATH = /abs/path/to/group
+"""
 import os
 
 
 class Config:
+    """Generic configuration"""
+
     APP_DIR = os.path.abspath(os.path.dirname(__file__))  # This directory
     PROJECT_ROOT = os.path.abspath(os.path.join(APP_DIR, os.pardir))
     DEBUG = False

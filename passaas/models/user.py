@@ -1,3 +1,4 @@
+# pylint: disable=too-many-arguments,too-few-public-methods
 """
 User model.
 """

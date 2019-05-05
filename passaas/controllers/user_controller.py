@@ -1,3 +1,4 @@
+# pylint: disable=too-many-arguments
 """
 User controller.
 Functions mapping from HTTP requests for user-related resources to model data.
@@ -32,8 +33,9 @@ def query_users(name=None, uid=None, gid=None, comment=None, home=None, shell=No
     If an argument is None, it's not used in the match. Otherwise a user must match
     all the specified values.
     """
+    # nosec is for a bandit false positive for shell=True
     users = find_users(
-        name=name, uid=uid, gid=gid, comment=comment, home=home, shell=shell
+        name=name, uid=uid, gid=gid, comment=comment, home=home, shell=shell  # nosec
     )
 
     return to_response(users, "No users matched the query")
