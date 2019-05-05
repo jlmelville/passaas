@@ -1,3 +1,4 @@
+# Codacy seems to ignore .bandit, so using bandit.yml instead
 exclude_dirs:
   - tests
   - .eggs
