@@ -77,6 +77,9 @@ called `instance` in the directory of the README you are reading now, i.e.:
     /config.cfg
 ```
 
+The `instance` directory does not exist by default, so you will need to create it, as well as the
+`config.cfg` file.
+
 If you *did* install passaas as a package, then it should be placed in the folder
 `$PREFIX/var/passaas.app-instance`. You can find out `$PREFIX` from `sys.prefix`. For example, if
 you have used [venv](https://docs.python.org/3/library/venv.html) to create a virtual environment
