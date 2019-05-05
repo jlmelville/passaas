@@ -10,6 +10,7 @@ class Group(NamedTuple):
     A Unix group. Has a name, a group id (gid) and a list of members, represented by the user's
     name.
     """
+
     name: str
     gid: int
     members: Sequence[str]

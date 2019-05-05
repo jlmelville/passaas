@@ -1,3 +1,6 @@
+"""
+Tests for Groups resources
+"""
 # pylint: disable=redefined-outer-name
 
 import os
@@ -9,10 +12,17 @@ from flask import current_app
 
 @pytest.fixture(scope="function")
 def groups_response(testapp):
+    """
+    Response for GETting all groups
+    """
     return testapp.get("/api/groups")
 
 
 class TestGetAllGroups:
+    """
+    Test GET /api/groups
+    """
+
     def test_status(self, groups_response):
         assert groups_response.status_int == 200
 
@@ -52,6 +62,10 @@ def group_exists_response(testapp):
 
 
 class TestGetUserExists:
+    """
+    Assertions for GET /api/groups/{gid} when {gid} exists
+    """
+
     def test_status(self, group_exists_response):
         assert group_exists_response.status_int == 200
 
@@ -69,6 +83,10 @@ class TestGetUserExists:
 
 
 class TestGetGroupDoesNotExist:
+    """
+    GET /api/groups/{gid} when {gid} doesn't exist
+    """
+
     def test_status(self, testapp):
         response = testapp.get("/api/groups/100", expect_errors=True)
         assert response.status_int == 404
