@@ -3,6 +3,7 @@ Based on:
 https://github.com/pypa/sampleproject/blob/master/setup.py
 """
 
+import re
 from setuptools import find_packages, setup
 from os import path
 
@@ -12,9 +13,20 @@ here = path.abspath(path.dirname(__file__))
 with open(path.join(here, "README.md"), encoding="utf-8") as f:
     long_description = f.read()
 
+# Version will be parsed (via regex) from the swagger yaml, so we only have
+# to maintain it in one place.
+version = "0.0.1"
+version_pattern = re.compile(r'^\s*version: "(.+)"')
+with open(path.join(here, "passaas", "swagger.yml")) as f:
+    for line in f:
+        result = version_pattern.search(line)
+        if result is not None:
+            version = result.group(1)
+            break
+
 setup(
     name="passaas",
-    version="1.0",
+    version=version,
     description="A simple web service for readonly access to passwd and group info",
     long_description=long_description,
     long_description_content_type="text/markdown",

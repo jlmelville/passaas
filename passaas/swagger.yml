@@ -1,7 +1,7 @@
 swagger: "2.0"
 info:
   description: Passaas API
-  version: "1.0.0"
+  version: "0.1.0"
   title: Passwd as a Service
 consumes:
   - application/json
