@@ -4,7 +4,7 @@ Functions mapping from HTTP requests for group-related resources to model data.
 """
 
 from passaas.models.group import find_groups
-from passaas.controllers import to_response
+from passaas.controllers.util import to_response
 
 
 def fetch_all_groups():

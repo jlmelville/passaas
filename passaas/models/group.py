@@ -4,6 +4,8 @@ The Group Model. Represents a Unix group and functions to read from a group file
 from typing import NamedTuple, Sequence
 from flask import current_app
 
+from passaas.models.util import sanitize_id, find
+
 
 class Group(NamedTuple):
     """
@@ -26,11 +28,10 @@ def find_groups(groups=None, name=None, gid=None, member=None):
     """
     if not groups:
         groups = read_group()
-    if name:
-        groups = [g for g in groups if g.name == name]
-    if gid:
-        gid = int(gid)
-        groups = [g for g in groups if g.gid == gid]
+
+    groups = find(groups, "name", name)
+    groups = find(groups, "gid", sanitize_id(gid))
+
     if member:
         for query_member in member:
             groups = [g for g in groups if query_member in g.members]

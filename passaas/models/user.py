@@ -5,6 +5,8 @@ User model.
 from typing import NamedTuple
 from flask import current_app
 
+from passaas.models.util import sanitize_id, find
+
 
 class User(NamedTuple):
     """
@@ -29,20 +31,13 @@ def find_users(
     """
     if not users:
         users = read_passwd()
-    if name:
-        users = [u for u in users if u.name == name]
-    if uid:
-        uid = int(uid)
-        users = [u for u in users if u.uid == uid]
-    if gid:
-        gid = int(gid)
-        users = [u for u in users if u.gid == gid]
-    if comment:
-        users = [u for u in users if u.comment == comment]
-    if home:
-        users = [u for u in users if u.home == home]
-    if shell:
-        users = [u for u in users if u.shell == shell]
+
+    users = find(users, "name", name)
+    users = find(users, "uid", sanitize_id(uid))
+    users = find(users, "gid", sanitize_id(gid))
+    users = find(users, "comment", comment)
+    users = find(users, "home", home)
+    users = find(users, "shell", shell)
 
     return users
 
