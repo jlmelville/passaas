@@ -1,0 +1,7 @@
+[TYPECHECK]
+
+# disable reasons 
+# bad-continuation: incompatible with black formatting https://github.com/python/black/issues/48
+# locally-disabled: definitely want to locally turn off some linting
+disable=bad-continuation,locally-disabled
+
