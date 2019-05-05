@@ -1,4 +1,5 @@
 from passaas.models.user import read_passwd
+from passaas.models.group import read_group
 
 
 def fetch_all_users():
@@ -37,3 +38,19 @@ def query_users(name=None, uid=None, gid=None, comment=None, home=None, shell=No
     if users:
         return [u._asdict() for u in users]
     return ("No users matched the query", 404)
+
+
+def fetch_groups_for_user(uid):
+    # Get the user with the specified uid
+    uid = int(uid)
+    users = read_passwd()
+    users = [u for u in users if u.uid == uid]
+    if not users:
+        return ("Not found", 404)
+    user = users[0]
+
+    groups = read_group()
+    groups = [g._asdict() for g in groups if user.name in g.members]
+    if groups:
+        return groups
+    return ("No groups", 404)

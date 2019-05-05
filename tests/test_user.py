@@ -209,6 +209,32 @@ class TestUpdatePasswdFile:
         # fixture cleans up by copying back over a copy of the original file
 
 
+class TestGetGroupsForUser:
+    """Test GET /users/<uid>/groups"""
+
+    def test_get_user_in_one_group(self, testapp):
+        """Groups for user syslog"""
+        response = testapp.get("/api/users/102/groups")
+        assert response.status_int == 200
+        assert len(response.json) == 1
+        assert response.json[0]["name"] == "adm"
+
+    def test_get_user_in_multiple_groups(self, testapp):
+        """Groups for user james"""
+        response = testapp.get("/api/users/1000/groups")
+        assert response.status_int == 200
+        assert len(response.json) == 2
+        assert list(e["name"] for e in response.json) == ["adm", "dialout"]
+
+    def test_user_with_no_groups_returns_404(self, testapp):
+        response = testapp.get("/api/users/1/groups", expect_errors=True)
+        assert response.status_int == 404
+
+    def test_non_existent_user_returns_404(self, testapp):
+        response = testapp.get("/api/users/9999/groups", expect_errors=True)
+        assert response.status_int == 404
+
+
 class TestBadPasswd:
     """Tests for missing or malformed passwd files."""
 

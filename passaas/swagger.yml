@@ -62,6 +62,22 @@ paths:
           description: Unknown or incorrectly specified query
         404:
           description: No users matched the query
+  /users/{uid}/groups:
+    get:
+      tags: [Users, Groups]
+      operationId: passaas.controllers.user_controller.fetch_groups_for_user
+      summary: Get the groups for a single user
+      parameters:
+        - $ref: '#/parameters/uid'
+      responses:
+        200:
+          description: Return groups
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Group'
+        404:
+          description: User does not exist or user is not a member of any groups.
   /groups:
     get:
       operationId: passaas.controllers.group_controller.fetch_all_groups
