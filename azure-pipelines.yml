@@ -9,6 +9,7 @@ trigger:
 # Matrix needs to be manually built:
 # https://github.com/Microsoft/azure-pipelines-yaml/issues/20
 strategy:
+  matrix:
     mac10.13_py36:
       imageName: 'macOS-10.13'
       python.version: '3.6'
@@ -46,4 +47,3 @@ steps:
     pip install pytest-azurepipelines
     python setup.py test
   displayName: 'Run tests'
-
