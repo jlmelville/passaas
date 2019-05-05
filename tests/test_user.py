@@ -1,9 +1,10 @@
+# pylint: disable=redefined-outer-name
+
 import os
 import shutil
 
-from flask import current_app
 import pytest
-import webtest as wt
+from flask import current_app
 
 
 @pytest.fixture(scope="function")

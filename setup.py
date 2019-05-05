@@ -1,11 +1,13 @@
+# pylint: disable=invalid-name
+
 """
 Based on:
 https://github.com/pypa/sampleproject/blob/master/setup.py
 """
 
 import re
-from setuptools import find_packages, setup
 from os import path
+from setuptools import find_packages, setup
 
 here = path.abspath(path.dirname(__file__))
 

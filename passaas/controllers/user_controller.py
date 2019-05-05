@@ -1,8 +1,16 @@
+"""
+User controller.
+Functions mapping from HTTP requests for user-related resources to model data.
+"""
+
 from passaas.models.user import read_passwd
 from passaas.models.group import read_group
 
 
 def fetch_all_users():
+    """
+    Returns all users, or 404 if there aren't any.
+    """
     users = read_passwd()
     if users:
         return [u._asdict() for u in users]
@@ -10,6 +18,9 @@ def fetch_all_users():
 
 
 def fetch_user(uid):
+    """
+    Returns the user with the specified uid, or 404 if there aren't any.
+    """
     uid = int(uid)
     users = read_passwd()
     users = [u for u in users if u.uid == uid]
@@ -19,6 +30,11 @@ def fetch_user(uid):
 
 
 def query_users(name=None, uid=None, gid=None, comment=None, home=None, shell=None):
+    """
+    Returns the user that match the specified values, or 404 if none match.
+    If an argument is None, it's not used in the match. Otherwise a user must match
+    all the specified values.
+    """
     users = read_passwd()
     if name:
         users = [u for u in users if u.name == name]
@@ -41,6 +57,11 @@ def query_users(name=None, uid=None, gid=None, comment=None, home=None, shell=No
 
 
 def fetch_groups_for_user(uid):
+    """
+    Returns the groups that the user, specified by uid is a member of,
+    or 404 if a user with that uid doesn't exist, or if the user does
+    exists, but does not belong to any groups.
+    """
     # Get the user with the specified uid
     uid = int(uid)
     users = read_passwd()
@@ -49,6 +70,7 @@ def fetch_groups_for_user(uid):
         return ("Not found", 404)
     user = users[0]
 
+    # Get the groups for that user (if any)
     groups = read_group()
     groups = [g._asdict() for g in groups if user.name in g.members]
     if groups:
