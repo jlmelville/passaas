@@ -19,11 +19,32 @@ class User(NamedTuple):
     shell: str
 
 
-def find_users(users, uid):
+def find_users(
+    users=None, name=None, uid=None, gid=None, comment=None, home=None, shell=None
+):
     """
-    Returns list of users with the specified uid, or an empty list if none match.
+    Return a list of users that match the specified values, or an empty list if none match.
+    If an argument is None, it's not used in the match. Otherwise a user must match
+    all the specified values.
     """
-    return [u for u in users if u.uid == uid]
+    if not users:
+        users = read_passwd()
+    if name:
+        users = [u for u in users if u.name == name]
+    if uid:
+        uid = int(uid)
+        users = [u for u in users if u.uid == uid]
+    if gid:
+        gid = int(gid)
+        users = [u for u in users if u.gid == gid]
+    if comment:
+        users = [u for u in users if u.comment == comment]
+    if home:
+        users = [u for u in users if u.home == home]
+    if shell:
+        users = [u for u in users if u.shell == shell]
+
+    return users
 
 
 def read_passwd():

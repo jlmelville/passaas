@@ -3,15 +3,15 @@ User controller.
 Functions mapping from HTTP requests for user-related resources to model data.
 """
 
-from passaas.models.user import read_passwd, find_users
-from passaas.models.group import read_group
+from passaas.models.user import find_users
+from passaas.models.group import find_groups
 
 
 def fetch_all_users():
     """
     Returns all users, or 404 if there aren't any.
     """
-    users = read_passwd()
+    users = find_users()
     if users:
         return [u._asdict() for u in users]
     return ("No users", 404)
@@ -21,7 +21,7 @@ def fetch_user(uid):
     """
     Returns the user with the specified uid, or 404 if there aren't any.
     """
-    users = find_users(read_passwd(), uid)
+    users = find_users(uid=uid)
     if users:
         return users[0]._asdict()
     return ("Not found", 404)
@@ -33,20 +33,9 @@ def query_users(name=None, uid=None, gid=None, comment=None, home=None, shell=No
     If an argument is None, it's not used in the match. Otherwise a user must match
     all the specified values.
     """
-    users = read_passwd()
-    if name:
-        users = [u for u in users if u.name == name]
-    if uid:
-        users = find_users(users, uid)
-    if gid:
-        gid = int(gid)
-        users = [u for u in users if u.gid == gid]
-    if comment:
-        users = [u for u in users if u.comment == comment]
-    if home:
-        users = [u for u in users if u.home == home]
-    if shell:
-        users = [u for u in users if u.shell == shell]
+    users = find_users(
+        name=name, uid=uid, gid=gid, comment=comment, home=home, shell=shell
+    )
 
     if users:
         return [u._asdict() for u in users]
@@ -60,14 +49,13 @@ def fetch_groups_for_user(uid):
     exists, but does not belong to any groups.
     """
     # Get the user with the specified uid
-    users = find_users(read_passwd(), uid)
+    users = find_users(uid=uid)
     if not users:
         return ("Not found", 404)
     user = users[0]
 
     # Get the groups for that user (if any)
-    groups = read_group()
-    groups = [g._asdict() for g in groups if user.name in g.members]
+    groups = find_groups(member=[user.name])
     if groups:
-        return groups
+        return [g._asdict() for g in groups]
     return ("No groups", 404)
