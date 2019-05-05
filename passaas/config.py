@@ -6,7 +6,7 @@ class Config:
     PROJECT_ROOT = os.path.abspath(os.path.join(APP_DIR, os.pardir))
     DEBUG = False
     TESTING = False
-    APP_PORT = 9090
+    APP_PORT = 5000
     PROPAGATE_EXCEPTIONS = False  # don't show traceback even if in debug mode
     PASSWD_PATH = "/etc/passwd"
     GROUP_PATH = "/etc/group"
