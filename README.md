@@ -6,6 +6,8 @@
 [![Test Coverage Status](https://coveralls.io/repos/github/jlmelville/passaas/badge.svg)](https://coveralls.io/github/jlmelville/passaas)
 [![Language grade: Python](https://img.shields.io/lgtm/grade/python/g/jlmelville/passaas.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/jlmelville/passaas/context:python)
 [![Total alerts](https://img.shields.io/lgtm/alerts/g/jlmelville/passaas.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/jlmelville/passaas/alerts/)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/2e0f91826a794453a874262813f6a777)](https://www.codacy.com/app/jlmelville/passaas?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=jlmelville/passaas&amp;utm_campaign=Badge_Grade)
+[![Maintainability](https://api.codeclimate.com/v1/badges/fa6d1bc93f079ff810c9/maintainability)](https://codeclimate.com/github/jlmelville/passaas/maintainability)
 
 A REST service that provides a (read-only) REST interface to `passwd` and `group` files. Built
 using [connexion](https://github.com/zalando/connexion).
