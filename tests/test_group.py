@@ -1,7 +1,7 @@
+# pylint: disable=redefined-outer-name,too-few-public-methods,missing-docstring,no-self-use
 """
 Tests for Groups resources
 """
-# pylint: disable=redefined-outer-name
 
 import os
 import shutil
@@ -13,7 +13,7 @@ from flask import current_app
 @pytest.fixture(scope="function")
 def groups_response(testapp):
     """
-    Response for GETting all groups
+    Response for a successful GET of /api/groups
     """
     return testapp.get("/api/groups")
 

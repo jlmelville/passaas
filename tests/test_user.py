@@ -1,5 +1,8 @@
-# pylint: disable=redefined-outer-name
-
+# pylint: disable=redefined-outer-name,too-few-public-methods,missing-docstring,no-self-use
+# re-enable missing-docstring if it becomes possible to only disable missing function docstring
+"""
+Tests for Users resources
+"""
 import os
 import shutil
 
@@ -9,10 +12,17 @@ from flask import current_app
 
 @pytest.fixture(scope="function")
 def users_response(testapp):
+    """
+    Response to a successful GET /api/users
+    """
     return testapp.get("/api/users")
 
 
 class TestGetAllUsers:
+    """
+    Assertions for a successful GET to /api/users
+    """
+
     def test_status(self, users_response):
         assert users_response.status_int == 200
 
@@ -80,10 +90,17 @@ class TestGetAllUsers:
 
 @pytest.fixture(scope="function")
 def user_exists_response(testapp):
+    """
+    Response to a successful GET /api/users/{uid}
+    """
     return testapp.get("/api/users/1")
 
 
 class TestGetUserExists:
+    """
+    Assertions for a successful GET /api/users/{uid}
+    """
+
     def test_status(self, user_exists_response):
         assert user_exists_response.status_int == 200
 
@@ -110,6 +127,10 @@ class TestGetUserExists:
 
 
 class TestGetUserDoesNotExist:
+    """
+    Assertions for an unsuccessful GET /api/users/{uid} where {uid} does not exist.
+    """
+
     def test_status(self, testapp):
         response = testapp.get("/api/users/100", expect_errors=True)
         assert response.status_int == 404

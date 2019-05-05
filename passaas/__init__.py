@@ -7,5 +7,5 @@ import pkg_resources
 
 try:
     __version__ = pkg_resources.get_distribution("passaas").version
-except Exception:  # pragma: no cover
+except Exception:  # pragma: no cover pylint: disable=broad-except
     __version__ = "unknown"
