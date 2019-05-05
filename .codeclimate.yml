@@ -1,4 +1,10 @@
+version: "2"
 languages:
     Python: true
 exclude_paths:
     - "tests/*"
+plugins:
+    sonar-python:
+      enabled: true
+    bandit:
+      enabled: true
