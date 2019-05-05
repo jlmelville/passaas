@@ -3,12 +3,22 @@ Model helper functions
 """
 
 
-def sanitize_id(id):
-    """
-    Returns id as either an integer or None, if it is not convertible.
+def sanitize_id(int_id):
+    """Returns int_id as either an integer or None, if it is not convertible.
+
+
+    For use with model find function where either integer or None is acceptable, but input from the
+    controller is either a string representation of the integer or None. This handles the
+    conversion and swallows the exception, making for a more "fluent" interface.
+
+    Arguments:
+        int_id {String or None} -- An id to convert. Can be None.
+
+    Returns:
+        {int or None} -- The converted id.
     """
     try:
-        return int(id)
+        return int(int_id)
     except TypeError:
         return None
 
