@@ -144,6 +144,14 @@ The instance folder approach works unchanged.
 * [pytest-azurepipelines](https://pypi.org/project/pytest-azurepipelines/) made publishing test
 results on Azure pipelines very easy.
 
+* I turned on [codacy](https://app.codacy.com) checking, but ended up turning off the
+[prospector](https://github.com/PyCQA/prospector) and [pylint](https://www.pylint.org/) checks
+because the configuration files in the project didn't seem to be picked up. Also the
+[remark-lint](https://github.com/remarkjs/remark-lint) got turned off because its default checks
+conflict with [markdownlint](https://github.com/DavidAnson/markdownlint) which I use with
+[Visual Studio Code](https://code.visualstudio.com/). codacy's rating of the code quality may
+therefore be less judgemental than it ought to be.
+
 ## License
 
 [The MIT License](https://opensource.org/licenses/MIT).
