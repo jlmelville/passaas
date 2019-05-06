@@ -54,8 +54,9 @@ python app.py --host=0.0.0.0 --port=8080
 
 ## API Documentation
 
-Assuming the default host and port, the [OpenAPI](https://www.openapis.org/) documentation for the
-API can be found at:
+Assuming the default host and port, the
+[swagger-ui](https://swagger.io/tools/swagger-ui/)-generated documentation for the API can be
+found at:
 
 ```bash
 http://localhost:5000/api/ui/
