@@ -12,7 +12,7 @@ from passaas.config import TestConfig, Config
 
 @pytest.yield_fixture(scope="function")
 def app():
-    """An application for the tests."""
+    """Application for the tests."""
     _app = create_app(TestConfig)
 
     ctx = _app.app.test_request_context()
@@ -25,7 +25,7 @@ def app():
 
 @pytest.fixture(scope="function")
 def testapp(app):
-    """A Webtest app."""
+    """Webtest app."""
     return wt.TestApp(app)
 
 
@@ -39,7 +39,7 @@ class PasswdUpdateConfig(TestConfig):
 
 @pytest.yield_fixture(scope="function")
 def passwd_update_app():
-    """An application with a passwd file intended to be updated."""
+    """Application with a passwd file intended to be updated."""
     _app = create_app(PasswdUpdateConfig)
 
     ctx = _app.app.test_request_context()
@@ -58,11 +58,11 @@ def passwd_update_app():
 
 @pytest.fixture(scope="function")
 def test_passwd_update_app(passwd_update_app):
-    """A Webtest app with a passwd file intended to be updated."""
+    """Webtest app with a passwd file intended to be updated."""
     return wt.TestApp(passwd_update_app)
 
 
-### Bad Passwords
+# Bad Passwords
 
 
 class MissingPasswdConfig(TestConfig):
@@ -79,7 +79,7 @@ class MissingPasswdConfig(TestConfig):
 
 @pytest.yield_fixture(scope="function")
 def missing_passwd_app():
-    """An application with a missing passwd file."""
+    """Application with a missing passwd file."""
     _app = create_app(MissingPasswdConfig)
 
     ctx = _app.app.test_request_context()
@@ -92,7 +92,7 @@ def missing_passwd_app():
 
 @pytest.fixture(scope="function")
 def test_missing_passwd_app(missing_passwd_app):
-    """A Webtest app with a missing passwd file."""
+    """Webtest app with a missing passwd file."""
     return wt.TestApp(missing_passwd_app)
 
 
@@ -109,7 +109,7 @@ class MalformedPasswdTooFewElementsConfig(TestConfig):
 
 @pytest.yield_fixture(scope="function")
 def malformed_passwd_too_few_elements_app():
-    """An application with a malformed passwd file."""
+    """Application with a malformed passwd file."""
     _app = create_app(MalformedPasswdTooFewElementsConfig)
 
     ctx = _app.app.test_request_context()
@@ -122,7 +122,7 @@ def malformed_passwd_too_few_elements_app():
 
 @pytest.fixture(scope="function")
 def test_malformed_passwd_too_few_elements_app(malformed_passwd_too_few_elements_app):
-    """A Webtest app with a malformed passwd file."""
+    """Webtest app with a malformed passwd file."""
     return wt.TestApp(malformed_passwd_too_few_elements_app)
 
 
@@ -139,7 +139,7 @@ class MalformedPasswdTooManyElementsConfig(TestConfig):
 
 @pytest.yield_fixture(scope="function")
 def malformed_passwd_too_many_elements_app():
-    """An application with a malformed passwd file with too many elements in a line."""
+    """Application with a malformed passwd file with too many elements in a line."""
     _app = create_app(MalformedPasswdTooManyElementsConfig)
 
     ctx = _app.app.test_request_context()
@@ -152,7 +152,7 @@ def malformed_passwd_too_many_elements_app():
 
 @pytest.fixture(scope="function")
 def test_malformed_passwd_too_many_elements_app(malformed_passwd_too_many_elements_app):
-    """A Webtest app with a malformed passwd file with too many elements in a line."""
+    """Webtest app with a malformed passwd file with too many elements in a line."""
     return wt.TestApp(malformed_passwd_too_many_elements_app)
 
 
@@ -169,7 +169,7 @@ class MalformedPasswdBadUidConfig(TestConfig):
 
 @pytest.yield_fixture(scope="function")
 def malformed_passwd_bad_uid_app():
-    """An application with a bad uid passwd file."""
+    """Application with a bad uid passwd file."""
     _app = create_app(MalformedPasswdBadUidConfig)
 
     ctx = _app.app.test_request_context()
@@ -182,7 +182,7 @@ def malformed_passwd_bad_uid_app():
 
 @pytest.fixture(scope="function")
 def test_malformed_passwd_bad_uid_app(malformed_passwd_bad_uid_app):
-    """A Webtest app with a bad uid passwd file."""
+    """Webtest app with a bad uid passwd file."""
     return wt.TestApp(malformed_passwd_bad_uid_app)
 
 
@@ -199,7 +199,7 @@ class MalformedPasswdBadGidConfig(TestConfig):
 
 @pytest.yield_fixture(scope="function")
 def malformed_passwd_bad_gid_app():
-    """An application with a bad gid passwd file."""
+    """Application with a bad gid passwd file."""
     _app = create_app(MalformedPasswdBadGidConfig)
 
     ctx = _app.app.test_request_context()
@@ -212,7 +212,7 @@ def malformed_passwd_bad_gid_app():
 
 @pytest.fixture(scope="function")
 def test_malformed_passwd_bad_gid_app(malformed_passwd_bad_gid_app):
-    """A Webtest app with a bad gid passwd file."""
+    """Webtest app with a bad gid passwd file."""
     return wt.TestApp(malformed_passwd_bad_gid_app)
 
 
@@ -227,7 +227,7 @@ class EmptyPasswdConfig(TestConfig):
 
 @pytest.yield_fixture(scope="function")
 def empty_passwd_app():
-    """An application with an empty passwd file."""
+    """Application with an empty passwd file."""
     _app = create_app(EmptyPasswdConfig)
 
     ctx = _app.app.test_request_context()
@@ -240,11 +240,11 @@ def empty_passwd_app():
 
 @pytest.fixture(scope="function")
 def test_empty_passwd_app(empty_passwd_app):
-    """A Webtest app with an empty passwd file."""
+    """Webtest app with an empty passwd file."""
     return wt.TestApp(empty_passwd_app)
 
 
-## Groups
+# Groups
 
 
 class GroupUpdateConfig(TestConfig):
@@ -257,7 +257,7 @@ class GroupUpdateConfig(TestConfig):
 
 @pytest.yield_fixture(scope="function")
 def group_update_app():
-    """An application with a passwd file intended to be updated."""
+    """Application with a passwd file intended to be updated."""
     _app = create_app(GroupUpdateConfig)
 
     ctx = _app.app.test_request_context()
@@ -276,11 +276,11 @@ def group_update_app():
 
 @pytest.fixture(scope="function")
 def test_group_update_app(group_update_app):
-    """A Webtest app with a group file intended to be updated."""
+    """Webtest app with a group file intended to be updated."""
     return wt.TestApp(group_update_app)
 
 
-### Bad Groups
+# Bad Groups
 
 
 class MissingGroupConfig(TestConfig):
@@ -295,7 +295,7 @@ class MissingGroupConfig(TestConfig):
 
 @pytest.yield_fixture(scope="function")
 def missing_group_app():
-    """An application with a missing group file."""
+    """Application with a missing group file."""
     _app = create_app(MissingGroupConfig)
 
     ctx = _app.app.test_request_context()
@@ -308,7 +308,7 @@ def missing_group_app():
 
 @pytest.fixture(scope="function")
 def test_missing_group_app(missing_group_app):
-    """A Webtest app with a missing group file."""
+    """Webtest app with a missing group file."""
     return wt.TestApp(missing_group_app)
 
 
@@ -323,7 +323,7 @@ class EmptyGroupConfig(TestConfig):
 
 @pytest.yield_fixture(scope="function")
 def empty_group_app():
-    """An application with an empty passwd file."""
+    """Application with an empty passwd file."""
     _app = create_app(EmptyGroupConfig)
 
     ctx = _app.app.test_request_context()
@@ -336,7 +336,7 @@ def empty_group_app():
 
 @pytest.fixture(scope="function")
 def test_empty_group_app(empty_group_app):
-    """A Webtest app with an empty group file."""
+    """Webtest app with an empty group file."""
     return wt.TestApp(empty_group_app)
 
 
@@ -353,7 +353,7 @@ class MalformedGroupTooFewElementsConfig(TestConfig):
 
 @pytest.yield_fixture(scope="function")
 def malformed_group_too_few_elements_app():
-    """An application with a malformed group file that has too few elements in a line."""
+    """Application with a malformed group file that has too few elements in a line."""
     _app = create_app(MalformedGroupTooFewElementsConfig)
 
     ctx = _app.app.test_request_context()
@@ -366,7 +366,7 @@ def malformed_group_too_few_elements_app():
 
 @pytest.fixture(scope="function")
 def test_malformed_group_too_few_elements_app(malformed_group_too_few_elements_app):
-    """A Webtest app with a malformed group file that has too few elements in a line."""
+    """Webtest app with a malformed group file that has too few elements in a line."""
     return wt.TestApp(malformed_group_too_few_elements_app)
 
 
@@ -383,7 +383,7 @@ class MalformedGroupTooManyElementsConfig(TestConfig):
 
 @pytest.yield_fixture(scope="function")
 def malformed_group_too_many_elements_app():
-    """An application with a malformed group file with too many elements in a line."""
+    """Application with a malformed group file with too many elements in a line."""
     _app = create_app(MalformedGroupTooManyElementsConfig)
 
     ctx = _app.app.test_request_context()
@@ -396,7 +396,7 @@ def malformed_group_too_many_elements_app():
 
 @pytest.fixture(scope="function")
 def test_malformed_group_too_many_elements_app(malformed_group_too_many_elements_app):
-    """A Webtest app with a malformed group file with too many elements in a line."""
+    """Webtest app with a malformed group file with too many elements in a line."""
     return wt.TestApp(malformed_group_too_many_elements_app)
 
 
@@ -413,7 +413,7 @@ class MalformedGroupBadGidConfig(TestConfig):
 
 @pytest.yield_fixture(scope="function")
 def malformed_group_bad_gid_app():
-    """An application with a bad gid group file."""
+    """Application with a bad gid group file."""
     _app = create_app(MalformedGroupBadGidConfig)
 
     ctx = _app.app.test_request_context()
@@ -426,5 +426,5 @@ def malformed_group_bad_gid_app():
 
 @pytest.fixture(scope="function")
 def test_malformed_group_bad_gid_app(malformed_group_bad_gid_app):
-    """A Webtest app with a bad gid group file."""
+    """Webtest app with a bad gid group file."""
     return wt.TestApp(malformed_group_bad_gid_app)

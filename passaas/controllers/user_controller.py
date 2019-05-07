@@ -1,6 +1,7 @@
 # pylint: disable=too-many-arguments
 """
 User controller.
+
 Functions mapping from HTTP requests for user-related resources to model data.
 """
 
@@ -10,17 +11,13 @@ from passaas.controllers.util import to_response
 
 
 def fetch_all_users():
-    """
-    Returns all users, or 404 if there aren't any.
-    """
+    """Return all users, or 404 if there aren't any."""
     users = find_users()
     return to_response(users, "No users")
 
 
 def fetch_user(uid):
-    """
-    Returns the user with the specified uid, or 404 if there isn't one.
-    """
+    """Return the user with the specified uid, or 404 if there isn't one."""
     users = find_users(uid=uid)
     if users:
         return users[0]._asdict()
@@ -29,7 +26,8 @@ def fetch_user(uid):
 
 def query_users(name=None, uid=None, gid=None, comment=None, home=None, shell=None):
     """
-    Returns the user that match the specified values, or 404 if none match.
+    Return the user that match the specified values, or 404 if none match.
+
     If an argument is None, it's not used in the match. Otherwise a user must match
     all the specified values.
     """
@@ -43,9 +41,10 @@ def query_users(name=None, uid=None, gid=None, comment=None, home=None, shell=No
 
 def fetch_groups_for_user(uid):
     """
-    Returns the groups that the user, specified by uid is a member of,
-    or 404 if a user with that uid doesn't exist, or if the user does
-    exists, but does not belong to any groups.
+    Return the groups that the user, specified by uid is a member of.
+
+    Returns 404 if a user with that uid doesn't exist, or if the user does
+    exist, but does not belong to any groups.
     """
     # Get the user with the specified uid
     users = find_users(uid=uid)

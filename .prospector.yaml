@@ -1,0 +1,5 @@
+strictness: veryhigh
+doc-warnings: false
+test-warnings: false
+pyroma:
+  run: true

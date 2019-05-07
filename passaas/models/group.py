@@ -1,6 +1,5 @@
-"""
-The Group Model. Represents a Unix group and functions to read from a group file.
-"""
+# pylint: disable=too-few-public-methods
+"""The Group Model. Represents a Unix group and functions to read from a group file."""
 from typing import NamedTuple, Sequence
 from flask import current_app
 
@@ -9,8 +8,9 @@ from passaas.models.util import sanitize_id, find
 
 class Group(NamedTuple):
     """
-    A Unix group. Has a name, a group id (gid) and a list of members, represented by the user's
-    name.
+    A Unix group.
+
+    Has a name, a group id (gid) and a list of members, represented by the user's name.
     """
 
     name: str
@@ -20,11 +20,11 @@ class Group(NamedTuple):
 
 def find_groups(groups=None, name=None, gid=None, member=None):
     """
-    Returns a list of groups that match the specified values, or an empty list
-    if no groups match. 'member' can be an array and is allowed to be a subset of
-    the 'members' array associated with a group, i.e. if member == ['a', 'b'] and a
-    given group has members == ['a', 'b', 'c'], then the member query will match that
-    group.
+    Return a list of groups that match the specified values, or an empty list if no groups match.
+
+    'member' can be an array and is allowed to be a subset of the 'members' array associated with a
+    group, i.e. if member == ['a', 'b'] and a given group has members == ['a', 'b', 'c'], then the
+    member query will match that group.
     """
     if not groups:
         groups = read_group()
@@ -41,7 +41,7 @@ def find_groups(groups=None, name=None, gid=None, member=None):
 
 def read_group():
     """
-    Reads a group file and return a list of Group objects.
+    Read a group file and return a list of Group objects.
 
     format is:
     name:x:gid:member1,member2...

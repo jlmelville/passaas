@@ -1,7 +1,5 @@
 # pylint: disable=too-many-arguments,too-few-public-methods
-"""
-User model.
-"""
+"""User model."""
 
 from typing import NamedTuple
 from flask import current_app
@@ -10,9 +8,7 @@ from passaas.models.util import sanitize_id, find
 
 
 class User(NamedTuple):
-    """
-    An entry in the passwd file, representing a user.
-    """
+    """An entry in the passwd file, representing a user."""
 
     name: str
     uid: int
@@ -27,8 +23,9 @@ def find_users(
 ):
     """
     Return a list of users that match the specified values, or an empty list if none match.
-    If an argument is None, it's not used in the match. Otherwise a user must match
-    all the specified values.
+
+    If an argument is None, it's not used in the match. Otherwise a user must match all the
+    specified values.
     """
     if not users:
         users = read_passwd()
@@ -44,9 +41,7 @@ def find_users(
 
 
 def read_passwd():
-    """
-    Reads the passwd file and returns a list of Users.
-    """
+    """Read the passwd file and returns a list of Users."""
     users = list()
     with open(current_app.config["PASSWD_PATH"]) as passwd_file:
         for line in passwd_file:

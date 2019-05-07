@@ -1,7 +1,5 @@
 # pylint: disable=redefined-outer-name,too-few-public-methods,missing-docstring,no-self-use
-"""
-Tests for Groups resources
-"""
+"""Tests for Groups resources."""
 
 import os
 import shutil
@@ -12,16 +10,12 @@ from flask import current_app
 
 @pytest.fixture(scope="function")
 def groups_response(testapp):
-    """
-    Response for a successful GET of /api/groups
-    """
+    """Response for a successful GET of '/api/groups'."""
     return testapp.get("/api/groups")
 
 
 class TestGetAllGroups:
-    """
-    Test GET /api/groups
-    """
+    """Test GET '/api/groups'."""
 
     def test_status(self, groups_response):
         assert groups_response.status_int == 200
@@ -57,14 +51,12 @@ class TestGetAllGroups:
 
 @pytest.fixture(scope="function")
 def group_exists_response(testapp):
-    """reads the equivalent of: adm:x:4:syslog,james"""
+    """Read the equivalent of: 'adm:x:4:syslog,james'."""
     return testapp.get("/api/groups/4")
 
 
 class TestGetUserExists:
-    """
-    Assertions for GET /api/groups/{gid} when {gid} exists
-    """
+    """Assertions for GET /api/groups/{gid} when {gid} exists."""
 
     def test_status(self, group_exists_response):
         assert group_exists_response.status_int == 200
@@ -83,9 +75,7 @@ class TestGetUserExists:
 
 
 class TestGetGroupDoesNotExist:
-    """
-    GET /api/groups/{gid} when {gid} doesn't exist
-    """
+    """GET /api/groups/{gid} when {gid} doesn't exist."""
 
     def test_status(self, testapp):
         response = testapp.get("/api/groups/100", expect_errors=True)
@@ -93,7 +83,7 @@ class TestGetGroupDoesNotExist:
 
 
 class TestQueryGroup:
-    """Test GET /groups/query?name,gid,member"""
+    """Test GET '/groups/query?name,gid,member'."""
 
     def test_query_name(self, testapp):
         response = testapp.get("/api/groups/query?name=root")
@@ -124,7 +114,7 @@ class TestQueryGroup:
                 assert member in result["members"]
 
     def test_query_repeat_members_comma_style(self, testapp):
-        """Same as the previous test, but use a different format for repeated query"""
+        """Same as the previous test, but use a different format for repeated query."""
         response = testapp.get(r"/api/groups/query?member=james,syslog")
         assert response.status_int == 200
         assert len(response.json) == 1
@@ -164,7 +154,7 @@ class TestQueryGroup:
 
 
 class TestUpdateGroupFile:
-    """Test that changes to a group file are reflected in the response"""
+    """Test that changes to a group file are reflected in the response."""
 
     def test_response_reflects_change_to_passwd(self, test_group_update_app):
         # Establish that the file is in the expected initial state with 4 entries

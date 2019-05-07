@@ -2,7 +2,8 @@
 # uwsgi isn't installable on Windows, so pylint will always complain about an import error
 # this is just an example deployment file, you don't need to use it
 """
-Example usage passing non-standard locations for passwd and group:
+Example usage passing non-standard locations for passwd and group.
+
 uwsgi --http :8080 --wsgi app_wsgi --processes 2 --set passwd=/tmp/passwd --set group=/tmp/group
 """
 

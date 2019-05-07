@@ -1,8 +1,9 @@
 # pylint: disable=invalid-name
 
 """
-Based on:
-https://github.com/pypa/sampleproject/blob/master/setup.py
+Settings.
+
+Based on: https://github.com/pypa/sampleproject/blob/master/setup.py
 """
 
 import re

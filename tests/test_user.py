@@ -1,8 +1,6 @@
 # pylint: disable=redefined-outer-name,too-few-public-methods,missing-docstring,no-self-use
 # re-enable missing-docstring if it becomes possible to only disable missing function docstring
-"""
-Tests for Users resources
-"""
+"""Tests for Users resources."""
 import os
 import shutil
 
@@ -12,16 +10,12 @@ from flask import current_app
 
 @pytest.fixture(scope="function")
 def users_response(testapp):
-    """
-    Response to a successful GET /api/users
-    """
+    """Response to a successful GET '/api/users'."""
     return testapp.get("/api/users")
 
 
 class TestGetAllUsers:
-    """
-    Assertions for a successful GET to /api/users
-    """
+    """Assertions for a successful GET to '/api/users'."""
 
     def test_status(self, users_response):
         assert users_response.status_int == 200
@@ -90,16 +84,12 @@ class TestGetAllUsers:
 
 @pytest.fixture(scope="function")
 def user_exists_response(testapp):
-    """
-    Response to a successful GET /api/users/{uid}
-    """
+    """Response to a successful GET /api/users/{uid}."""
     return testapp.get("/api/users/1")
 
 
 class TestGetUserExists:
-    """
-    Assertions for a successful GET /api/users/{uid}
-    """
+    """Assertions for a successful GET /api/users/{uid}."""
 
     def test_status(self, user_exists_response):
         assert user_exists_response.status_int == 200
@@ -127,9 +117,7 @@ class TestGetUserExists:
 
 
 class TestGetUserDoesNotExist:
-    """
-    Assertions for an unsuccessful GET /api/users/{uid} where {uid} does not exist.
-    """
+    """Assertions for an unsuccessful GET /api/users/{uid} where {uid} does not exist."""
 
     def test_status(self, testapp):
         response = testapp.get("/api/users/100", expect_errors=True)
@@ -137,7 +125,7 @@ class TestGetUserDoesNotExist:
 
 
 class TestQueryUser:
-    """Test GET /users/query?name,uid,gid,comment,home,shell"""
+    """Test GET '/users/query?name,uid,gid,comment,home,shell'."""
 
     def test_query_name(self, testapp):
         response = testapp.get("/api/users/query?name=root")
@@ -209,7 +197,7 @@ class TestQueryUser:
 
 
 class TestUpdatePasswdFile:
-    """Test that changes to a passwd file are reflected in the response"""
+    """Test that changes to a passwd file are reflected in the response."""
 
     def test_response_reflects_change_to_passwd(self, test_passwd_update_app):
         # Establish that the file is in the expected initial state with 4 entries
@@ -232,17 +220,17 @@ class TestUpdatePasswdFile:
 
 
 class TestGetGroupsForUser:
-    """Test GET /users/<uid>/groups"""
+    """Test GET /users/<uid>/groups."""
 
     def test_get_user_in_one_group(self, testapp):
-        """Groups for user syslog"""
+        """Groups for user syslog."""
         response = testapp.get("/api/users/102/groups")
         assert response.status_int == 200
         assert len(response.json) == 1
         assert response.json[0]["name"] == "adm"
 
     def test_get_user_in_multiple_groups(self, testapp):
-        """Groups for user james"""
+        """Groups for user james."""
         response = testapp.get("/api/users/1000/groups")
         assert response.status_int == 200
         assert len(response.json) == 2

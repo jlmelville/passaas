@@ -1,10 +1,10 @@
-"""
-Controller helper functions
-"""
+"""Controller helper functions."""
 
 
 def to_response(objects, not_found_msg):
     """
+    Convert namedtuple objects to dict form.
+
     If the specified sequence of objects is non-empty, return the dict version of them.
     Otherwise return 404 and the specified message.
 
