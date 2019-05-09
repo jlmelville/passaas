@@ -22,10 +22,12 @@ def find_users(
     users=None, name=None, uid=None, gid=None, comment=None, home=None, shell=None
 ):
     """
-    Return a list of users that match the specified values, or an empty list if none match.
+    Return user that match the specified values.
 
-    If an argument is None, it's not used in the match. Otherwise a user must match all the
-    specified values.
+    If no users match, an empty list is returned.
+
+    If an argument is None, it's not used in the match. Otherwise a user must match all
+    the specified values.
     """
     if not users:
         users = read_passwd()

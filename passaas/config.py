@@ -2,9 +2,9 @@
 """
 Connexion Configuration.
 
-Rather than edit this file, you should prefer to add a config.cfg file to the instance folder.
-See the root app.py file for how this is used. The instance folder is located in one of two
-places:
+Rather than edit this file, you should prefer to add a config.cfg file to the instance
+folder. See the root app.py file for how this is used. The instance folder is located
+in one of two places:
 
 * if you haven't pip installed this package:
     /instance
@@ -16,8 +16,8 @@ places:
         /var
             /passaas.app-instance
                 config.cfg <--- your config file
-$PREFIX is whatever sys.prefix says it is. In a venv, it's /path/to/venv/var, so the full path to
-your config.cfg would be /path/to/venv/var/passaas.app-instance/config.cfg
+$PREFIX is whatever sys.prefix says it is. In a venv, it's /path/to/venv/var, so the
+full path to your config.cfg would be /path/to/venv/var/passaas.app-instance/config.cfg
 
 Some example config.cfg file entries are:
 

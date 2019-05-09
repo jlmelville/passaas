@@ -1,10 +1,11 @@
 # pylint: disable=invalid-name,import-error
-# uwsgi isn't installable on Windows, so pylint will always complain about an import error
-# this is just an example deployment file, you don't need to use it
+# uwsgi isn't installable on Windows, so pylint will always complain about an import
+# error this is just an example deployment file, you don't need to use it
 """
 Example usage passing non-standard locations for passwd and group.
 
-uwsgi --http :8080 --wsgi app_wsgi --processes 2 --set passwd=/tmp/passwd --set group=/tmp/group
+uwsgi --http :8080 --wsgi app_wsgi --processes 2 --set passwd=/tmp/passwd
+uwsgi --http :8080 --wsgi app_wsgi --set group=/tmp/group
 """
 
 from flask.helpers import get_debug_flag

@@ -1,5 +1,17 @@
 strictness: veryhigh
 doc-warnings: false
-test-warnings: false
+test-warnings: true
 pyroma:
   run: true
+vulture:
+  run: false
+dodgy:
+  run: true
+pyflakes:
+  run: false
+pylint:
+  run: false
+pep8:
+  run: false
+mccabe:
+  run: false

@@ -1,4 +1,5 @@
-# pylint: disable=redefined-outer-name,too-few-public-methods,missing-docstring,no-self-use
+# pylint: disable=redefined-outer-name,too-few-public-methods,missing-docstring
+# pylint: disable=no-self-use
 """Tests for Groups resources."""
 
 import os

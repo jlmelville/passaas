@@ -20,11 +20,13 @@ class Group(NamedTuple):
 
 def find_groups(groups=None, name=None, gid=None, member=None):
     """
-    Return a list of groups that match the specified values, or an empty list if no groups match.
+    Return groups that match the specified values.
 
-    'member' can be an array and is allowed to be a subset of the 'members' array associated with a
-    group, i.e. if member == ['a', 'b'] and a given group has members == ['a', 'b', 'c'], then the
-    member query will match that group.
+    Returns an empty list if no groups match.
+
+    'member' can be an array and is allowed to be a subset of the 'members' array
+    associated with a group, i.e. if member == ['a', 'b'] and a given group has members
+    == ['a', 'b', 'c'], then the member query will match that group.
     """
     if not groups:
         groups = read_group()

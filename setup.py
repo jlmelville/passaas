@@ -1,5 +1,4 @@
 # pylint: disable=invalid-name
-
 """
 Settings.
 
@@ -34,6 +33,7 @@ setup(
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/jlmelville/passaas",
+    license="BSD",
     author="jlmelville@gmail.com",
     author_email="jlmelville@gmail.com",
     classifiers=[
@@ -44,6 +44,7 @@ setup(
         "Programming Language :: Python :: 3.6",
         "Programming Language :: Python :: 3.7",
     ],
+    keywords="REST admin password group",
     packages=find_packages(),
     python_requires=">=3.6",
     install_requires=["Flask", "connexion", "swagger-ui-bundle>=0.0.2"],

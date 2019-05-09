@@ -97,7 +97,7 @@ def test_missing_passwd_app(missing_passwd_app):
 
 
 class MalformedPasswdTooFewElementsConfig(TestConfig):
-    """Configuration pointing to a malformed passwd file with too few elements in a line."""
+    """Configuration for a malformed passwd file with too few elements in a line."""
 
     PRESERVE_CONTEXT_ON_EXCEPTION = False
     PASSWD_PATH = os.path.abspath(
@@ -127,7 +127,7 @@ def test_malformed_passwd_too_few_elements_app(malformed_passwd_too_few_elements
 
 
 class MalformedPasswdTooManyElementsConfig(TestConfig):
-    """Configuration pointing to a malformed passwd file with too many elements in a line."""
+    """Configuration for a malformed passwd file with too many elements in a line."""
 
     PRESERVE_CONTEXT_ON_EXCEPTION = False
     PASSWD_PATH = os.path.abspath(
@@ -341,7 +341,7 @@ def test_empty_group_app(empty_group_app):
 
 
 class MalformedGroupTooFewElementsConfig(TestConfig):
-    """Configuration pointing to a malformed group file with too few elements in a line."""
+    """Configuration for a malformed group file with too few elements in a line."""
 
     PRESERVE_CONTEXT_ON_EXCEPTION = False
     GROUP_PATH = os.path.abspath(
@@ -371,7 +371,7 @@ def test_malformed_group_too_few_elements_app(malformed_group_too_few_elements_a
 
 
 class MalformedGroupTooManyElementsConfig(TestConfig):
-    """Configuration pointing to a malformed group file with too many elements in a line."""
+    """Configuration for a malformed group file with too many elements in a line."""
 
     PRESERVE_CONTEXT_ON_EXCEPTION = False
     GROUP_PATH = os.path.abspath(

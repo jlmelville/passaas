@@ -1,5 +1,7 @@
-# pylint: disable=redefined-outer-name,too-few-public-methods,missing-docstring,no-self-use
-# re-enable missing-docstring if it becomes possible to only disable missing function docstring
+# pylint: disable=redefined-outer-name,too-few-public-methods,missing-docstring
+# pylint: disable=no-self-use
+# re-enable missing-docstring if it becomes possible to only disable missing function
+# docstring
 """Tests for Users resources."""
 import os
 import shutil
@@ -117,7 +119,7 @@ class TestGetUserExists:
 
 
 class TestGetUserDoesNotExist:
-    """Assertions for an unsuccessful GET /api/users/{uid} where {uid} does not exist."""
+    """Unsuccessful GET /api/users/{uid} where {uid} does not exist."""
 
     def test_status(self, testapp):
         response = testapp.get("/api/users/100", expect_errors=True)
