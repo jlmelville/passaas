@@ -4,7 +4,8 @@
 # bad-continuation: incompatible with black formatting https://github.com/python/black/issues/48
 # locally-disabled: definitely want to locally turn off some linting
 # line-too-long, trailing-whitespace: handled by flake8
-disable = bad-continuation, locally-disabled, line-too-long, trailing-whitespace
+# missing-docstring: handled by pycodestyle
+disable = bad-continuation, locally-disabled, line-too-long, trailing-whitespace, missing-docstring
 
 [BASIC]
 
