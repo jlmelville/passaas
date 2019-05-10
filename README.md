@@ -12,6 +12,17 @@
 A REST service that provides a (read-only) REST interface to `passwd` and `group` files. Built
 using [connexion](https://github.com/zalando/connexion).
 
+No, I don't expect anyone to find this useful. But I do hope it can act as a template if you
+are looking to start a connexion-based service that includes basic testing (using
+[WebTest](https://github.com/Pylons/webtest)), configuration and so on. Also, it's set up for
+CI with [travis-ci](https://travis-ci.org) (Linux), [appveyor](https://ci.appveyor.com) (Windows)
+and [azure pipelines](Mac), code coverage (via [coveralls](coveralls.io)) and code quality checks
+with [LGTM](https://lgtm.com), [codacy](https://codacy.com/) and
+[Code Climate](https://codeclimate.com). Finally, I also have some basic linting configuration
+files that can be used with [Visual Studio Code](isualstudio.com), which is my favoured IDE for
+Python. Hopefully much of this can be used by other Python projects so you can get going quickly.
+See below for an explanation of which files do what.
+
 ## Prerequisites
 
 Python 3.6 or higher.
