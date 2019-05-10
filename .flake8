@@ -7,16 +7,17 @@
 # N8**: Naming Conventions plugin pep8-naming
 select = E, W, F, C, N
 
-ignore = E203, W503, N803
+ignore = E203, E402, W503, F401, N803
 # E203 Whitespace before ':' also hits slices, e.g. '1 : 10'.
+# E402 Module level import not at top of file: pylint wrong-import-position handles this.
 # W503 Line break occurred before a binary operator
 #   PEP8 flipped on this: https://github.com/python/peps/commit/c59c4376ad233a62ca4b3a6060c81368bd21e85b
+# F401 module imported but unused: false positive when a top-level __init__ wants to export names from submodules.
 # N803 Argument name should be lower case
 
 # Other ignored rules I've seen
 # E266 Too many leading '#' for block comment 
 # E501 Line too long (can be done with pylint)
-# F401 module imported but unused
 # F403 'from module import *' used; unable to detect undefined names
 
 max-line-length = 88
