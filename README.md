@@ -27,6 +27,8 @@ useful for setting up:
 * Some basic linting configuration files that can also be used with the 'Problems' pane in
 [Visual Studio Code](code.visualstudio.com).
 
+Some details on which files are used for these tools is in `automation.md`.
+
 ## Prerequisites
 
 Python 3.6 or higher.
