@@ -3,8 +3,8 @@
 Connexion Configuration.
 
 Rather than edit this file, you should prefer to add a config.cfg file to the instance
-folder. See the root app.py file for how this is used. The instance folder is located
-in one of two places:
+folder. See the project root folder server.py file for an example of how the config 
+file is used. The instance folder is located in one of two places:
 
 * if you haven't pip installed this package:
     /instance

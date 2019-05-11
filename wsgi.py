@@ -4,8 +4,8 @@
 """
 Example usage passing non-standard locations for passwd and group.
 
-uwsgi --http :8080 --wsgi app_wsgi --processes 2 --set passwd=/tmp/passwd
-uwsgi --http :8080 --wsgi app_wsgi --set group=/tmp/group
+uwsgi --http :8080 --wsgi wsgi --processes 2 --set passwd=/tmp/passwd
+uwsgi --http :8080 --wsgi wsgi --set group=/tmp/group
 """
 
 from flask.helpers import get_debug_flag

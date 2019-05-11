@@ -12,16 +12,20 @@
 A REST service that provides a (read-only) REST interface to `passwd` and `group` files. Built
 using [connexion](https://github.com/zalando/connexion).
 
-No, I don't expect anyone to find this useful. But I do hope it can act as a template if you
-are looking to start a connexion-based service that includes basic testing (using
-[WebTest](https://github.com/Pylons/webtest)), configuration and so on. Also, it's set up for
-CI with [travis-ci](https://travis-ci.org) (Linux), [appveyor](https://ci.appveyor.com) (Windows)
-and [azure pipelines](Mac), code coverage (via [coveralls](coveralls.io)) and code quality checks
-with [LGTM](https://lgtm.com), [codacy](https://codacy.com/) and
-[Code Climate](https://codeclimate.com). Finally, I also have some basic linting configuration
-files that can be used with [Visual Studio Code](isualstudio.com), which is my favoured IDE for
-Python. Hopefully much of this can be used by other Python projects so you can get going quickly.
-See below for an explanation of which files do what.
+Although not practically useful, I do hope it can act as a template if you
+are looking to quickly get started with  a connexion-based service that includes basic testing
+(using [WebTest](https://github.com/Pylons/webtest)), configuration and so on.
+
+If you don't care about connexion (or Flask apps), then as an example Python app it might also be
+useful for setting up:
+
+* Continuous Integration with [travis-ci](https://travis-ci.org) (Linux),
+[appveyor](https://ci.appveyor.com) (Windows) and [azure pipelines](https://dev.azure.com) (Mac).
+* Code coverage via [coveralls](coveralls.io).
+* Code quality checks with [LGTM](https://lgtm.com), [codacy](https://codacy.com/) and
+[Code Climate](https://codeclimate.com).
+* Some basic linting configuration files that can also be used with the 'Problems' pane in
+[Visual Studio Code](code.visualstudio.com).
 
 ## Prerequisites
 
@@ -51,7 +55,7 @@ difference is where you put any extra configuration files -- see the
 Using Flask's built-in server:
 
 ```bash
-python app.py
+python server.py
 ```
 
 This will launch the app at `localhost:5000`.
@@ -60,7 +64,7 @@ To override the host and port, use the `--host` and `--port` arguments respectiv
 
 ```bash
 # listen on all assigned IPs on port 8080
-python app.py --host=0.0.0.0 --port=8080
+python server.py --host=0.0.0.0 --port=8080
 ```
 
 ## API Documentation
@@ -117,7 +121,7 @@ GROUP_PATH = "/abs/path/to/group"
 Alternatively, you can use the `--passwd` and `--group` options when lauching the server:
 
 ```bash
-python app.py --passwd=/path/to/some/other/passwd --group=/path/to/some/other/group
+python server.py --passwd=/path/to/some/other/passwd --group=/path/to/some/other/group
 ```
 
 If for some reason you like to really complicate life for yourself and you use an instance folder
@@ -135,11 +139,11 @@ python setup.py test
 
 ## Deployment
 
-See the `app_wsgi.py` file for something that can be used as a WSGI module with
+See the `wsgi.py` file for something that can be used as a WSGI module with
 [uwsgi](http://projects.unbit.it/uwsgi/). To deploy on port 8080 with 2 workers:
 
 ```bash
-uwsgi --http :8080 --wsgi app_wsgi --processes 2
+uwsgi --http :8080 --wsgi wsgi --processes 2
 ```
 
 There are also command line options to override the default `passwd` and `group` locations: add the

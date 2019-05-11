@@ -4,17 +4,17 @@ Start web service on Flask server.
 
 Run using:
 
-python app.py
+python server.py
 
 to start on localhost:5000
 
 Host and port can be specified:
 
-python app.py --host=0.0.0.0 --port=8080
+python server.py --host=0.0.0.0 --port=8080
 
 Also the passwd and group file:
 
-python app.py --passwd=/path/to/some/other/passwd --group=/path/to/some/other/group
+python server.py --passwd=/path/to/some/other/passwd --group=/path/to/some/other/group
 """
 import argparse
 
