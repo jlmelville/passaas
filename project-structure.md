@@ -126,6 +126,12 @@ In one extra piece of hackery
 I parse the `openapi.yaml` file. If you aren't creating a connexion app, you can just hardcode it here,
 and the `__init__.py` of the package should still work to allow this sort of thing:
 
+```python
+import passaas
+
+print(passaas.__version__)
+```
+
 ## `setup.cfg`
 
 Contains configuration to make running tests and test coverage easier.
