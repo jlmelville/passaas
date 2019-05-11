@@ -9,15 +9,16 @@
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/2e0f91826a794453a874262813f6a777)](https://www.codacy.com/app/jlmelville/passaas?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=jlmelville/passaas&amp;utm_campaign=Badge_Grade)
 [![Maintainability](https://api.codeclimate.com/v1/badges/fa6d1bc93f079ff810c9/maintainability)](https://codeclimate.com/github/jlmelville/passaas/maintainability)
 
-A REST service that provides a (read-only) REST interface to `passwd` and `group` files. Built
+A REST service that provides a (read-only) interface to `passwd` and `group` files. Built
 using [connexion](https://github.com/zalando/connexion).
 
-Although not practically useful, I do hope it can act as a template if you
-are looking to quickly get started with  a connexion-based service that includes basic testing
-(using [WebTest](https://github.com/Pylons/webtest)), configuration and so on.
+Although not practically useful, I do hope it can act as a sample connexion app with a greater
+focus on basic configuration and testing (using [WebTest](https://github.com/Pylons/webtest)),
+compared to other connexion example projects. Some more details on the project structure are in
+`project-structure.md`.
 
-If you don't care about connexion (or Flask apps), then as an example Python app it might also be
-useful for setting up:
+If you don't care about connexion (or Flask apps), then as a Python app it might also be useful for
+setting up:
 
 * Continuous Integration with [travis-ci](https://travis-ci.org) (Linux),
 [appveyor](https://ci.appveyor.com) (Windows) and [azure pipelines](https://dev.azure.com) (Mac).
@@ -71,7 +72,13 @@ python server.py --host=0.0.0.0 --port=8080
 
 ## API Documentation
 
-Assuming the default host and port, the
+Assuming the default host and port, once running, you can make a GET request to
+
+```bash
+http://localhost:5000/api/users
+```
+
+to see the content of your `passwd` file returned as JSON. For more information, the
 [swagger-ui](https://swagger.io/tools/swagger-ui/)-generated documentation for the API can be
 found at:
 
@@ -154,8 +161,16 @@ The instance folder approach works unchanged.
 
 ## See Also
 
-* Examples of using connexion with unit testing are incredibly thin on the ground.
-<https://github.com/hirose31/connexion-tiny-petstore> was invaluable in getting going.
+* Examples of using connexion with testing are incredibly thin on the ground.
+[connexion-tiny-petstore](https://github.com/hirose31/connexion-tiny-petstore) was invaluable in
+getting going. It deserves your love and github stars (if that's your sort of thing).
+
+* Other sample connexion apps are
+[connexion-example](https://github.com/hjacobs/connexion-example/),
+[python-flask-microservice](https://github.com/ssola/python-flask-microservice), and
+[flask-connexion-rest](https://github.com/realpython/materials/tree/master/flask-connexion-rest).
+These are much simpler to understand, but if you are new to both Flask and connexion, it's hard to
+see how you would change these apps so they can be tested.
 
 * Testing was done with [WebTest](https://github.com/Pylons/webtest).
 

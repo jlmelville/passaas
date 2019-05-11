@@ -27,7 +27,7 @@ but not that Travis is where I run the coverage checks and upload code coverage 
 The [travis-ci](https://travis-ci.org) configuration, which runs under Linux. As mentioned above,
 this is the only CI that runs code coverage. It also runs the
 [black code formatter](https://github.com/python/black) in "check" mode: if black wants to reformat
-the code, this indicates that I forgot to run it before checking in the code and the build is 
+the code, this indicates that I forgot to run it before checking in the code and the build is
 failed. This is a good way to enforce a fixed code layout.
 
 ### `appveyor.yml`
@@ -88,7 +88,7 @@ opinions will appear in the 'Problems' tab, along with an icon indicating the se
 
 I have configured the following tools as a good start for linting black-formatted code, trying
 to avoid false positives and having multiple tools flag the same problem. I have erred on the
-side of strictness, so you will definitely want to further tweak these settings to turn off 
+side of strictness, so you will definitely want to further tweak these settings to turn off
 complaints that you won't have any plans to fix, particularly with regard to naming conventions.
 
 ### `.pylintrc`
@@ -150,17 +150,16 @@ A sample chunk of the Visual Studio Code `settings.json` file might look like:
         "-c",
         "bandit.yml"
     ],
-    "python.linting.flake8Enabled": true, // contains pyflakes pycodestyle and mccabe
-    "python.linting.mypyEnabled": false, // static type checker
-    "python.linting.pep8Path": "pycodestyle", // pep8 was supserseded by pycodestyle
+    "python.linting.flake8Enabled": true,
+    "python.linting.mypyEnabled": false,
+    "python.linting.pep8Path": "pycodestyle",
     "python.linting.pep8Enabled": false,
-    /* prospector: dodgy, frosted, mccabe, pycodestyle, pydocstyle, pyflakes, pylint, pyroma, vulture */
     "python.linting.prospectorEnabled": true,
-    "python.linting.pylamaEnabled": false, // mccabe, pycodestyle, pydocstyle, pyflakes, pylint, radon
+    "python.linting.pylamaEnabled": false,
     "python.linting.pylintEnabled": true,
     "python.linting.pylintUseMinimalCheckers": false,
     "python.linting.maxNumberOfProblems": 1000,
-    "python.linting.pydocstyleEnabled": false, // turn this on now and again
+    "python.linting.pydocstyleEnabled": false,
     "editor.rulers": [88]
 }
 ```
