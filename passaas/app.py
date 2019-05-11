@@ -15,8 +15,10 @@ def create_app(config_object=ProdConfig):
 
     conn_app = connexion.App(__name__, specification_dir=config_object.APP_DIR)
     flask_app = conn_app.app
-    flask_app.config.root_path = flask_app.instance_path
 
+    # Seemed to need this to get the instance folder support working
+    # https://github.com/zalando/connexion/issues/556
+    flask_app.config.root_path = flask_app.instance_path
     # Configuration from config.py
     flask_app.config.from_object(config_object)
 
