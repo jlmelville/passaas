@@ -71,14 +71,41 @@ black . && python setup.py test
 ```
 
 You can create a git hook to run black before checking in, but I didn't have much luck with that
-on Windows. As mentioned above, the Travis CI will fail if it detects that black wasn't run on
-a checkin.
+on Windows. An alternative that works just as well for VS Code is to set up `black` to autoformat
+on save. For that, see the sample `settings.json` file below. As mentioned above, the Travis CI
+will fail if it detects that black wasn't run on a checkin.
 
 The way black formats code means that you will need to adjust some settings of some of the linting
 tools, particularly `pylint` and `flake8`. Most pertinently, `black` tries to set line lengths to
 88 characters, which differs from the defaults of `pylint` and `flake8`.
 
 ## Linters
+
+Configuration for these all live in the `lint` subdirectory, as the associated configuration and
+helper files were cluttering up the main directory.
+
+### Quick installation
+
+The linters can be installed with:
+
+```bash
+./install-linters.sh
+```
+
+This just uses `pip` to install them in a specific order (with some uninstalling), in order to get
+up-to-date and compatible versions of the specific tools I have chosen (i.e. those which are
+well-integrated with VS Code). You only have to do it once. It's easy enough to follow the
+procedure on Windows manually.
+
+To run the linters from the command-line you can use:
+
+```bash
+./check-file.sh <file>
+```
+
+But I use the integrated VS code support. See below for a `settings.json` that sets this up.
+
+### Linting Details
 
 Wow,
 [Python has a lot of linting tools](https://github.com/vintasoftware/python-linters-and-code-analysis).
@@ -144,26 +171,46 @@ A sample chunk of the Visual Studio Code `settings.json` file might look like:
 
 ```json
 {
+    "python.pythonPath": "venv/bin/python",
     "python.linting.enabled": true,
     "python.linting.banditEnabled": true,
     "python.linting.banditArgs": [
         "-c",
-        "bandit.yml"
+        "lint/bandit.yml",
+        "-q"
     ],
     "python.linting.flake8Enabled": true,
+    "python.linting.flake8Args": [
+        "--config",
+        "lint/.flake8"
+    ],
     "python.linting.mypyEnabled": false,
     "python.linting.pep8Path": "pycodestyle",
     "python.linting.pep8Enabled": false,
     "python.linting.prospectorEnabled": true,
+    "python.linting.prospectorArgs": [
+        "--profile",
+        "lint/.prospector.yaml"
+    ],
     "python.linting.pylamaEnabled": false,
     "python.linting.pylintEnabled": true,
+    "python.linting.pylintArgs": [
+        "--rcfile",
+        "lint/.pylintrc"
+    ],
     "python.linting.pylintUseMinimalCheckers": false,
+    "python.linting.pylintCategorySeverity.refactor": "Information",
     "python.linting.maxNumberOfProblems": 1000,
     "python.linting.pydocstyleEnabled": false,
-    "editor.rulers": [88]
+    "editor.rulers": [
+        88
+    ],
+    "python.formatting.provider": "black",
+    "python.formatting.blackPath": "venv/bin/black",
+    "editor.formatOnSave": true
 }
 ```
 
 This turns on the tools discussed above, and leaves others off, including
 [pylama](https://github.com/klen/pylama), which I haven't discussed: it is a tool with a similar
-set of linters to `prospector` and `flake8`.
+set of linters to `prospector` and `flake8`. It also uses `black` to autoformat the code on save.
