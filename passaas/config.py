@@ -3,7 +3,7 @@
 Connexion Configuration.
 
 Rather than edit this file, you should prefer to add a config.cfg file to the instance
-folder. See the project root folder server.py file for an example of how the config 
+folder. See the project root folder server.py file for an example of how the config
 file is used. The instance folder is located in one of two places:
 
 * if you haven't pip installed this package:
@@ -36,7 +36,7 @@ class Config:
     TESTING = False
     APP_PORT = 5000
     PROPAGATE_EXCEPTIONS = False  # don't show traceback even if in debug mode
-    PASSWD_PATH = "/etc/passwd"
+    PASSWD_PATH = "/etc/passwd"  # nosec
     GROUP_PATH = "/etc/group"
 
 
