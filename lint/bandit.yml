@@ -2,3 +2,7 @@
 exclude_dirs:
   - tests
   - .eggs
+
+# input
+skips: 
+  - B322

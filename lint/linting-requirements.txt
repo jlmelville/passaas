@@ -1,0 +1,5 @@
+# this also installs pylint and pycodestyle
+bandit
+prospector[with_pyroma]
+flake8
+black

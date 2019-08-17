@@ -3,14 +3,14 @@
 # disable reasons 
 # bad-continuation: incompatible with black formatting https://github.com/python/black/issues/48
 # locally-disabled: definitely want to locally turn off some linting
-# line-too-long, trailing-whitespace: handled by flake8
+# line-too-long, trailing-whitespace, literal-comparison: handled by flake8
 # missing-docstring: handled by pycodestyle
-disable = bad-continuation, locally-disabled, line-too-long, trailing-whitespace, missing-docstring
+disable = bad-continuation, locally-disabled, line-too-long, trailing-whitespace, missing-docstring, literal-comparison
 
 [BASIC]
 
-# allow short variables names 
-good-names=X,y,d,c,i,i1,i2,j,j1,j2,k,n,p,q
+# Uncomment and add short variables names you think should be allowed (e.g. i, j, n)
+#good-names=
 
 [FORMAT]
 
@@ -21,5 +21,5 @@ max-line-length=88
 # List of members which are set dynamically and missed by pylint inference
 # system, and so shouldn't trigger E1101 when accessed. Python regular
 # expressions are accepted.
-generated-members=np.*,numba.*
+generated-members=np.*,numba.*,iloc,loc
 
