@@ -167,10 +167,11 @@ it's time to look at documentation, and turn it off at other times.
 
 ### `settings.json`
 
-A sample chunk of the Visual Studio Code `settings.json` file might look like:
+A sample chunk of the Visual Studio Code `settings.json` using a virtual environment might look like:
 
 ```json
 {
+    "python.jediEnabled": false,
     "python.pythonPath": "venv/bin/python",
     "python.linting.enabled": true,
     "python.linting.banditEnabled": true,
@@ -209,6 +210,14 @@ A sample chunk of the Visual Studio Code `settings.json` file might look like:
     "python.formatting.blackPath": "venv/bin/black",
     "editor.formatOnSave": true
 }
+```
+
+With anaconda on Windows, you probably need the first few entries to be along the lines of:
+
+```json
+    "python.jediEnabled": false,
+    "python.condaPath": "C:\\path\\to\\Anaconda\\Scripts",
+    "python.pythonPath": "C:\\path\\to\\Anaconda\\envs\\some-env\\python.exe",
 ```
 
 This turns on the tools discussed above, and leaves others off, including
